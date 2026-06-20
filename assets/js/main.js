@@ -200,7 +200,7 @@
   window.addEventListener('load', () => {
     let portfolioContainer = select('.portfolio-container');
     if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
+      window.portfolioIsotope = new Isotope(portfolioContainer, {
         itemSelector: '.portfolio-item'
       });
 
@@ -213,7 +213,7 @@
         });
         this.classList.add('filter-active');
 
-        portfolioIsotope.arrange({
+        window.portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
 

@@ -2,725 +2,1710 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gagan portpholio-bootscrap</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>Gagan portpholio-bootscrap</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Album Styles -->
+    <style>
+        /* ===== ALBUM CARD STYLES (Amazon Prime Inspired) ===== */
+        .album-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: #ffffff;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px) scale(1.03);
+        }
+
+        .album-poster {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .album-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .album-card:hover .album-poster img {
+            transform: scale(1.1);
+        }
+
+        .album-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.95));
+            pointer-events: none;
+        }
+
+        .album-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 183, 39, 0.9);
+            backdrop-filter: blur(10px);
+            color: #0f171a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .album-card-info {
+            padding: 16px 18px 20px;
+            background: #ffffff;
+        }
+
+        .album-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #3b434a;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .album-genre {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .genre-tag {
+            background: rgba(255, 183, 39, 0.15);
+            color: #c48a00;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .album-desc {
+            color: #6c757d;
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Play pill button overlay on hover */
+        .album-card::after {
+            content: '\25B6  PLAY';
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(14px);
+            opacity: 0;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #0f171a;
+            background: #ffb727;
+            padding: 10px 30px;
+            border-radius: 50px;
+            white-space: nowrap;
+            transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+        }
+
+        .album-card:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Portfolio section background */
+        .portfolio {
+            background: #ffffff;
+            padding: 80px 0;
+        }
+
+        .portfolio .section-title h2 {
+            color: #3b434a;
+        }
+
+        .portfolio .section-title span {
+            color: #eef0f2;
+        }
+
+        .portfolio .section-title p {
+            color: #6c757d;
+        }
+
+        .portfolio #portfolio-flters li {
+            color: #444444;
+            border-color: #e0e0e0;
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio #portfolio-flters li:hover,
+        .portfolio #portfolio-flters li.filter-active {
+            color: #fff;
+            background: #ffb727;
+            border-color: #ffb727;
+        }
+
+        .portfolio .portfolio-item {
+            margin-bottom: 30px;
+        }
+
+        /* ===== KILL ALL SHADOWS ON CARDS ===== */
+        .portfolio-item,
+        .portfolio-item *,
+        .portfolio-item:hover,
+        .portfolio-item:hover *,
+        .album-card,
+        .album-card:hover,
+        .album-card *,
+        .album-card:hover * {
+            box-shadow: none !important;
+            -webkit-box-shadow: none !important;
+        }
+
+
+        /* ===== ALBUM DETAIL OVERLAY ===== */
+        .album-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0f171a;
+            z-index: 10000;
+            overflow-y: auto;
+            display: none;
+            animation: fadeInOverlay 0.5s ease;
+        }
+
+        .album-detail-overlay.active {
+            display: block;
+        }
+
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .album-detail-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 10003;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .album-detail-close:hover {
+            background: rgba(255, 183, 39, 0.9);
+            transform: rotate(90deg);
+        }
+
+        .album-detail-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .album-detail-hero-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right,
+                    rgba(15, 23, 26, 0.95) 0%,
+                    rgba(15, 23, 26, 0.7) 40%,
+                    rgba(15, 23, 26, 0.3) 70%,
+                    rgba(15, 23, 26, 0.1) 100%),
+                linear-gradient(to top,
+                    rgba(15, 23, 26, 1) 0%,
+                    rgba(15, 23, 26, 0.4) 30%,
+                    transparent 60%);
+        }
+
+        .album-detail-content {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .album-detail-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .prime-badge {
+            background: linear-gradient(135deg, #ffb727, #e6a320);
+            color: #0f171a;
+            padding: 5px 14px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .album-year,
+        .album-rating {
+            color: #8a9bae;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .album-detail-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .album-detail-desc {
+            color: #b0bec5;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .album-detail-actions {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn-play {
+            background: linear-gradient(135deg, #ffb727, #f0a500);
+            color: #0f171a;
+            border: none;
+            padding: 14px 40px;
+            font-size: 16px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 20px rgba(255, 183, 39, 0.3);
+        }
+
+        .btn-play:hover {
+            background: linear-gradient(135deg, #ffc750, #ffb727);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 183, 39, 0.5);
+        }
+
+        .btn-play i {
+            font-size: 22px;
+        }
+
+        .btn-watchlist {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 14px 30px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-watchlist:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .album-detail-info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #8a9bae;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .album-divider {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Thumbnail strip */
+        .album-thumb-strip {
+            padding: 20px 60px 60px;
+            background: #0f171a;
+        }
+
+        .strip-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+        }
+
+        .thumb-scroll {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .thumb-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .thumb-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .thumb-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 183, 39, 0.4);
+            border-radius: 10px;
+        }
+
+        .thumb-item {
+            flex: 0 0 220px;
+            height: 140px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .thumb-item:hover {
+            border-color: #ffb727;
+            transform: scale(1.05);
+        }
+
+        .thumb-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-item .thumb-number {
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* ===== FULLSCREEN PHOTO PLAYER ===== */
+        .photo-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 20000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .photo-player.active {
+            display: flex;
+        }
+
+        .player-controls-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 20001;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .player-close {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .player-close:hover {
+            background: rgba(255, 183, 39, 0.9);
+            transform: rotate(90deg);
+        }
+
+        .player-title {
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .player-counter {
+            color: #8a9bae;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .player-image-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-image-wrapper img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            animation: playerFadeIn 0.6s ease;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes playerFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .player-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .player-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ffb727, #f0a500);
+            transition: width 0.3s linear;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 10px rgba(255, 183, 39, 0.5);
+        }
+
+        .player-controls-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        }
+
+        .player-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .player-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .player-btn-play {
+            width: 68px;
+            height: 68px;
+            font-size: 28px;
+            background: linear-gradient(135deg, #ffb727, #f0a500);
+            border: none;
+            color: #0f171a;
+            box-shadow: 0 4px 25px rgba(255, 183, 39, 0.4);
+        }
+
+        .player-btn-play:hover {
+            background: linear-gradient(135deg, #ffc750, #ffb727);
+            box-shadow: 0 8px 35px rgba(255, 183, 39, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .album-detail-content {
+                left: 24px;
+                right: 24px;
+                bottom: 30px;
+            }
+
+            .album-detail-title {
+                font-size: 28px;
+            }
+
+            .album-detail-desc {
+                font-size: 14px;
+            }
+
+            .album-thumb-strip {
+                padding: 20px 24px 40px;
+            }
+
+            .album-poster {
+                height: 220px;
+            }
+
+            .btn-play {
+                padding: 12px 28px;
+                font-size: 14px;
+            }
+
+            .btn-watchlist {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+
+            .album-detail-hero {
+                height: 55vh;
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .album-detail-title {
+                font-size: 24px;
+            }
+
+            .album-detail-hero {
+                height: 50vh;
+                min-height: 300px;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex justify-content-center align-items-center header-transparent">
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex justify-content-center align-items-center header-transparent">
 
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-        <li><a class="nav-link scrollto" href="#about">About</a></li>
-        <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
-        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a></li>
-        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav><!-- .navbar -->
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                <li><a class="nav-link scrollto" href="#about">About</a></li>
+                <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
+                <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
-  </header><!-- End Header -->
+    </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container">
-      <h1>Gagan KM</h1>
-      <h2>An AIML Graduate</h2>
-      <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
-    </div>
-  </section><!-- End Hero -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero">
+        <div class="hero-container">
+            <h1>Gagan KM</h1>
+            <h2>An AIML Graduate</h2>
+            <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
+        </div>
+    </section><!-- End Hero -->
 
-  <main id="main">
+    <main id="main">
 
-    <!-- ======= About Me Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
+        <!-- ======= About Me Section ======= -->
+        <section id="about" class="about">
+            <div class="container">
 
-        <div class="section-title">
-          <span>About Me</span>
-          <h2>About Me</h2>
-          <p>Hello friends welcome to my portfolio</p>
+                <div class="section-title">
+                    <span>About Me</span>
+                    <h2>About Me</h2>
+                    <p>Hello friends welcome to my portfolio</p>
+                </div>
+
+                <div class="row">
+                    <div
+                        class="image col-lg-4 d-flex align-items-stretch justify-content-center justify-content-lg-start">
+                    </div>
+                    <div class="col-lg-8 d-flex flex-column align-items-stretch">
+                        <div class="content ps-lg-4 d-flex flex-column justify-content-center">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>Gagan
+                                                KM</span></li>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+91
+                                                7406335619</span></li>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Bengaluru
+                                                ,India</span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <ul>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>22</span>
+                                        </li>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong><span>Bachelor
+                                                of Engineering With Honours in AIML</span></li>
+                                        <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
+                                            <span>kmgagan662@gmail.com</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <br>
+                            <h3>MY Learnings</h3>
+                            <div class="skills-content ps-lg-4">
+                                <div class="progress">
+                                    <span class="skill">AWS & DevOps<i class="val">70%</i></span>
+                                    <div class="progress-bar-wrap">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress">
+                                    <span class="skill">Web-Development<i class="val">75%</i></span>
+                                    <div class="progress-bar-wrap">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="75"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress">
+                                    <span class="skill">Machine learning<i class="val">60%</i></span>
+                                    <div class="progress-bar-wrap">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <div class="progress">
+                                    <span class="skill">Power-BI<i class="val">80%</i></span>
+                                    <div class="progress-bar-wrap">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="80"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+        </section><!-- End About Me Section -->
+
+        <!-- ======= My Resume Section ======= -->
+        <section id="resume" class="resume">
+            <div class="container">
+
+                <div class="section-title">
+                    <span>My Resume</span>
+                    <h2>My Resume</h2>
+                    <p>Speaking about Myself gives me a proud feeling </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="resume-title">SUMMARY</h3>
+                        <div class="resume-item pb-0">
+                            <h4>Gagan KM</h4>
+                            <p><em>DevOps and AWS Engineer specializing in cloud automation, CI/CD pipeline development,
+                                    and container orchestration with Docker and Kubernetes. Skilled in designing
+                                    scalable, secure, and cost-efficient AWS infrastructures, with a strong foundation
+                                    in automation and cloud-native tools. A motivated fresher eager to learn, adapt, and
+                                    contribute to delivering high-quality, reliable solutions.</em></p>
+                            <p>
+                            <ul>
+                                <li><i class="bi bi-linkedin"> </i><b>Linkedin:</b> <a
+                                        href="https://www.linkedin.com/in/gagan-k-m-425167277/">Gagan K M</a></li>
+                                <li> <i class="bi bi-github"></i> <b>Github</b> :<a
+                                        href="https://github.com/gagankm27">Gagankm27</a></li>
+                                <li><i class="bi bi-instagram"> </i> <b>Instagram</b> :<a
+                                        href="https://www.instagram.com/gagan_km27/">gagan_km27</a></li>
+                            </ul>
+                            </p>
+                        </div>
+
+                        <h3 class="resume-title">EDUCATION</h3>
+                        <div class="resume-item">
+                            <h4>COLLEGE</h4>
+                            <ul>
+                                <LI>RAJARAJESWARI COLLEGE OF ENGINEERING ,<b>AIML</b>,2025</LI>
+                                <li>SHESHADRIPURAM INDEPENDENT PRE UNIVERSITY COLLEGE , <b>PCMB</b> 2021</li>
+                                <li>KENGERI HIGH SCHOOL ,2019</li>
+                            </ul>
+                        </div>
+
+                        <div class="resume-item">
+                            <h4>Skills</h4>
+                            <li>AWS and DevOps | Enterprises Linux | Cloud computing | Power BI | Data Analytics | SQL |
+                                Python | Machine Learning | DSA.</li>
+                        </div>
+
+                        <div class="resume-item">
+                            <h4>CERTIFICATION</h4>
+                            <ul>
+                                <li><B>POWER BI</B> DEVELOPMENT</li>
+                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
+                                        style="color: rgb(17, 9, 9);"><b>AWS</b> APAC <b>Solutions Architecture</b>
+                                        virtual experience.</a></li>
+                                <li><b>CAPGEMINI</b> Certification on SOFT SKILLS and CRM Using <B>SALESFORCE</B></li>
+                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
+                                        style="color: rgb(17, 9, 9);"> <b>TATA</b> Groups <b>GenAI Powered Data
+                                            Analytics</b>.</a></li>
+                                <li><b>BEST PAPER AWARD</b> in International Conference on Recent Trends in
+                                    Computational Engineering and Technologies on <b>"Smart Home Automation"</b>
+                                    (IJMRSET, 2024)</li>
+                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
+                                        style="color: rgb(17, 9, 9);"> <b>Deloitte</b> Australia <b>Data Analytics</b>
+                                        Job Simulation.</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h3 class="resume-title">WORK EXPERIENCE</h3>
+                        <div class="resume-item">
+                            <h4>Freelancing </h4>
+                            <p>
+                            <ul>
+                                <li>ROLE : <B>Technical Trainer</B></li>
+                                <li>Conducted <b>Frontend Development</b> Workshop at Sridevi Institute of Technology
+                                    [SIET] Tumkur, covering HTML, CSS, and JavaScript,JQuery, Bootstrap.</li>
+                                <li>Trained MCA students in <b>Machine Learning</b>, guiding them through Python-based
+                                    projects and real-world applications.</li>
+                                <li>Delivered <b>Advanced Excel & Power BI</b> training at Primus Institution,
+                                    Yelahanka, focusing on data analysis and dashboards.</li>
+                            </ul>
+                            </p>
+                        </div>
+
+                        <div class="resume-item">
+                            <h5>INTERN</h5>
+                            <p>
+                            <ul>
+                                <li>ROLE : <B>POWER-BI DEVELOPER</B></li>
+                                <li>Designing, developing, and maintaining interactive Power BI dashboards that present
+                                    key business metrics, sales performance, and operational trends in a visually
+                                    compelling and actionable format.</li>
+                                <li>Writing and optimizing SQL queries to extract, manipulate, and join datasets from
+                                    multiple databases, while leveraging Excel for advanced calculations, data
+                                    validation, and ad-hoc analytical tasks.</li>
+                                <li>Utilizing Power Query to clean, transform, and integrate large volumes of raw data
+                                    from diverse sources, ensuring accuracy, consistency, and readiness for reporting
+                                    and dashboard visualization.</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6" style="a:hover{color: brown;}">
+                        <h3 class="resume-title">Resume</h3>
+                        <div class="resume-item pb-0">
+                            <a href="https://drive.google.com/file/d/1boeWmGik6lumwhxP1nP_-XiyyldrPUEg/view?usp=drive_link"
+                                download="Gagan KM_C.pdf" style="text-decoration:none;"><b>CLOUD ENGINEER <i
+                                        class="bi bi-box-arrow-up-right"></i></b></a> &nbsp;
+                            <a href="https://drive.google.com/file/d/1a2AxWpZkOTgnfss5Qkox16TCK8_uaA1h/view?usp=sharing"
+                                download="Gagan KM_D.pdf" style="text-decoration:none;color:black;"><b>DATA ANALYST <i
+                                        class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
+                            <a href="https://drive.google.com/file/d/17b7QCFydnSO5TupKDciQO57v7Lw6V9AT/view?usp=sharing"
+                                download="Gagan KM_DE.pdf" style="text-decoration:none;"><b>DevOps ENGINEER <i
+                                        class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
+                            <a href="https://drive.google.com/file/d/1-mLHC-tZkgd_7Ivx0XGSDv-X-nv-Gvsn/view?usp=sharing"
+                                download="Gagan KM_S.pdf" style="text-decoration:none;color: black;"><b>SOFTWARE
+                                    ENGINEER <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
+                            <a href="https://drive.google.com/file/d/1dGzk1qNIJepNdt0WFGBnwep3ob1ldr3l/view?usp=sharing"
+                                download="Gagan KM_P.pdf" style="text-decoration:none;"><b>POWER-BI DEVELOPER <i
+                                        class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
+                        </div><br>
+                    </div>
+                </div>
+        </section><!-- End My Resume Section -->
+
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials">
+            <div class="container position-relative">
+
+                <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/arthi.jpg" class="testimonial-img" alt="">
+                                <h3>S Arthi</h3>
+                                <h4>Bestestesssssssttttttttt Friend :) </h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    My Constant, You were every where in my life in this college Life- Ur caring and ur
+                                    fights are all always nice.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/aisiri.jpg" class="testimonial-img" alt="">
+                                <h3>Aisiri P</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Planner of the trip,we nearly never took,but the hype was real . But we enjoyed
+                                    moments with you.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/shravani.jpg" class="testimonial-img" alt="">
+                                <h3>Shravani</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Thanks for being the best part of my journey☺.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/abish.jpg" class="testimonial-img" alt="">
+                                <h3>Abishyanth</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    THANK YOU For the best bus ride of my life....owe you a lot Gagan❤.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/shrunga.jpg" class="testimonial-img" alt="">
+                                <h3>Shrunga</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Brother From Another Mother, Lots of LOVE💝.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/manish.jpg" class="testimonial-img" alt="">
+                                <h3>Manish</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    u r a darkness in light,a sheep in form of wolf , a sweet world in a bitter
+                                    flavour😂.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/srujana.jpg" class="testimonial-img" alt="">
+                                <h3>Srujana</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Scooty Partner(1yr)🛵 , Almost Crashed :) ,#GANJA #POOGAN👨‍👩‍👦.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/varsha.jpg" class="testimonial-img" alt="">
+                                <h3>Varsha MK</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Gagan Anna, My Kinder Joy Supplier. Been a friend ,Best Friend,Enemy at IPL
+                                    times.Bus Partner and Made one good change in my life Decisions, Late comer , Job
+                                    aadmele Innu Kinder Joy Supply Madu....
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/samartha.jpg" class="testimonial-img" alt="">
+                                <h3>Samartha Gowda</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Thanks for Being my Best Buddy Bro.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/vamshi.jpg" class="testimonial-img" alt="">
+                                <h3>Vamshi S</h3>
+                                <h4>Kattappa</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Nina Preethiya kattappa
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/abhi.jpg" class="testimonial-img" alt="">
+                                <h3> Abhisheik </h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Memories Forever Be Happy 🤩.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/ajeesh.jpg" class="testimonial-img" alt="">
+                                <h3>Ajeesh Reegan</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    ---------------------
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="assets/img/durgesh.jpg" class="testimonial-img" alt="">
+                                <h3>Durgesh Babu</h3>
+                                <h4>Best Friend</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    --------------------------------.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section><!-- End Testimonials Section -->
+
+        <!-- ======= My Portfolio Section (Amazon Prime Style) ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+
+                <div class="section-title">
+                    <span>My Portfolio</span>
+                    <h2>My Portfolio</h2>
+                    <p>know more about Me</p>
+                </div>
+
+                <ul id="portfolio-flters" class="d-flex justify-content-center">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".filter-academic">Academic</li>
+                    <li data-filter=".filter-cultural">Culturals</li>
+                    <li data-filter=".filter-friends">Friends</li>
+                </ul>
+
+                <div class="row portfolio-container" id="album-grid">
+                    <!-- Dynamic albums will be rendered here by JavaScript -->
+                </div>
+
+            </div>
+        </section><!-- End My Portfolio Section -->
+
+        <!-- ======= Album Detail Overlay (Amazon Prime Style) ======= -->
+        <div id="album-detail-overlay" class="album-detail-overlay">
+            <button class="album-detail-close" onclick="closeAlbum()" title="Close">&times;</button>
+            <div class="album-detail-hero" id="album-detail-hero">
+                <div class="album-detail-hero-gradient"></div>
+                <div class="album-detail-content">
+                    <div class="album-detail-meta">
+                        <span class="prime-badge"><i class="bi bi-star-fill"></i> GAGAN'S COLLECTION</span>
+                        <span class="album-year">2025</span>
+                        <span class="album-rating">&starf; Premium</span>
+                    </div>
+                    <h1 class="album-detail-title" id="album-detail-title">Album Title</h1>
+                    <p class="album-detail-desc" id="album-detail-desc">Album description goes here.</p>
+                    <div class="album-detail-actions">
+                        <button class="btn-play" onclick="playAlbum()" id="btn-play-album">
+                            <i class="bi bi-play-fill"></i> Play
+                        </button>
+                        <button class="btn-watchlist" onclick="closeAlbum()">
+                            <i class="bi bi-arrow-left"></i> Back
+                        </button>
+                    </div>
+                    <div class="album-detail-info-row">
+                        <span id="album-photo-count">0 Photos</span>
+                        <span class="album-divider">|</span>
+                        <span id="album-category">Category</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Strip -->
+            <div class="album-thumb-strip" id="album-thumb-strip">
+                <h3 class="strip-title">Scenes from this Album</h3>
+                <div class="thumb-scroll" id="thumb-scroll"></div>
+            </div>
         </div>
 
-        <div class="row">
-          <div class="image col-lg-4 d-flex align-items-stretch justify-content-center justify-content-lg-start"></div>
-          <div class="col-lg-8 d-flex flex-column align-items-stretch">
-            <div class="content ps-lg-4 d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>Gagan KM</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+91 7406335619</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Bengaluru ,India</span></li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <ul>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>22</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong><span>Bachelor of Engineering With Honours in AIML</span></li>
-                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>kmgagan662@gmail.com</span></li>
-                  </ul>
-                </div>
-              </div>
-              
-            <br>
-              <h3>MY Learnings</h3>
-            <div class="skills-content ps-lg-4">
-              <div class="progress">
-                <span class="skill">AWS & DevOps<i class="val">70%</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Web-Development<i class="val">75%</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Machine learning<i class="val">60%</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Power-BI<i class="val">80%</i></span>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-              </div>
+        <!-- ======= Fullscreen Photo Player (Movie Mode) ======= -->
+        <div id="photo-player" class="photo-player">
+            <div class="player-controls-top">
+                <button class="player-close" onclick="closePlayer()">&times;</button>
+                <span class="player-title" id="player-title">Album</span>
+                <span class="player-counter" id="player-counter">1 / 5</span>
             </div>
-
-          </div>
+            <div class="player-image-wrapper">
+                <img id="player-image" src="" alt="Photo">
+                <div class="player-progress-bar">
+                    <div class="player-progress" id="player-progress"></div>
+                </div>
+            </div>
+            <div class="player-controls-bottom">
+                <button class="player-btn" onclick="prevPhoto()"><i class="bi bi-skip-backward-fill"></i></button>
+                <button class="player-btn player-btn-play" onclick="togglePlayPause()" id="btn-play-pause">
+                    <i class="bi bi-pause-fill" id="play-pause-icon"></i>
+                </button>
+                <button class="player-btn" onclick="nextPhoto()"><i class="bi bi-skip-forward-fill"></i></button>
+            </div>
         </div>
 
-      </div>
-    </section><!-- End About Me Section -->
 
-    <!-- ======= My Resume Section ======= -->
-    <section id="resume" class="resume">
-      <div class="container">
+        <!-- ======= Contact Me Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container">
 
-        <div class="section-title">
-          <span>My Resume</span>
-          <h2>My Resume</h2>
-          <p>Speaking about Myself gives me a proud feeling </p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <h3 class="resume-title">SUMMARY</h3>
-            <div class="resume-item pb-0">
-              <h4>Gagan KM</h4>
-              <p><em>DevOps and AWS Engineer specializing in cloud automation, CI/CD pipeline development, and container orchestration with Docker and Kubernetes. Skilled in designing scalable, secure, and cost-efficient AWS infrastructures, with a strong foundation in automation and cloud-native tools. A motivated fresher eager to learn, adapt, and contribute to delivering high-quality, reliable solutions.</em></p>
-              <p>
-              <ul>
-                <li><i class="bi bi-linkedin"> </i><b>Linkedin:</b> <a href="https://www.linkedin.com/in/gagan-k-m-425167277/">Gagan K M</a></li>
-                <li> <i class="bi bi-github"></i> <b>Github</b> :<a href="https://github.com/gagankm27">Gagankm27</a></li>
-                <li><i class="bi bi-instagram"> </i> <b>Instagram</b> :<a href="https://www.instagram.com/gagan_km27/">gagan_km27</a></li>
-              </ul>
-              </p>
-            </div>
-
-            <h3 class="resume-title">EDUCATION</h3>
-            <div class="resume-item">
-              <h4>COLLEGE</h4>
-              <ul>
-                <LI>RAJARAJESWARI COLLEGE OF ENGINEERING ,<b>AIML</b>,2025</LI>
-                <li>SHESHADRIPURAM INDEPENDENT PRE UNIVERSITY COLLEGE , <b>PCMB</b> 2021</li>
-                <li>KENGERI HIGH SCHOOL ,2019</li>
-              </ul>
-            </div>
-
-            <div class="resume-item">
-              <h4>Skills</h4>
-              <li>AWS and DevOps | Enterprises Linux | Cloud computing | Power BI | Data Analytics | SQL | Python | Machine Learning | DSA.</li>   
-            </div>
-
-            <div class="resume-item">
-              <h4>CERTIFICATION</h4>
-                <ul>
-                <li><B>POWER BI</B> DEVELOPMENT</li>
-                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy" style="color: rgb(17, 9, 9);"><b>AWS</b> APAC <b>Solutions Architecture</b> virtual experience.</a></li>
-                <li><b>CAPGEMINI</b> Certification on SOFT SKILLS and CRM Using <B>SALESFORCE</B></li>
-                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy" style="color: rgb(17, 9, 9);"> <b>TATA</b> Groups <b>GenAI Powered Data Analytics</b>.</a></li>
-                <li><b>BEST PAPER AWARD</b> in International Conference on Recent Trends in Computational Engineering and Technologies on <b>"Smart Home Automation"</b> (IJMRSET, 2024)</li>
-                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy" style="color: rgb(17, 9, 9);"> <b>Deloitte</b> Australia <b>Data Analytics</b> Job Simulation.</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <h3 class="resume-title">WORK EXPERIENCE</h3>
-            <div class="resume-item">
-              <h4>Freelancing </h4>
-              <p>
-              <ul>
-                <li>ROLE : <B>Technical Trainer</B></li>
-                <li>Conducted <b>Frontend Development</b> Workshop at Sridevi Institute of Technology [SIET] Tumkur, covering HTML, CSS, and JavaScript,JQuery, Bootstrap.</li>
-                <li>Trained MCA students in <b>Machine Learning</b>, guiding them through Python-based projects and real-world applications.</li>
-                <li>Delivered <b>Advanced Excel & Power BI</b> training at Primus Institution, Yelahanka, focusing on data analysis and dashboards.</li>
-              </ul>
-              </p>
-            </div>
-
-            <div class="resume-item">
-              <h5>INTERN</h5>
-              <p>
-              <ul>
-                <li>ROLE : <B>POWER-BI DEVELOPER</B></li>
-                <li>Designing, developing, and maintaining interactive Power BI dashboards that present key business metrics, sales performance, and operational trends in a visually compelling and actionable format.</li>
-                <li>Writing and optimizing SQL queries to extract, manipulate, and join datasets from multiple databases, while leveraging Excel for advanced calculations, data validation, and ad-hoc analytical tasks.</li>
-                <li>Utilizing Power Query to clean, transform, and integrate large volumes of raw data from diverse sources, ensuring accuracy, consistency, and readiness for reporting and dashboard visualization.</li>
-              </ul>
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-6" style="a:hover{color: brown;}">
-            <h3 class="resume-title">Resume</h3>
-            <div class="resume-item pb-0">
-              <a href="https://drive.google.com/file/d/1boeWmGik6lumwhxP1nP_-XiyyldrPUEg/view?usp=drive_link" download="Gagan KM_C.pdf" style="text-decoration:none;"><b>CLOUD ENGINEER <i class="bi bi-box-arrow-up-right"></i></b></a> &nbsp;
-              <a href="https://drive.google.com/file/d/1a2AxWpZkOTgnfss5Qkox16TCK8_uaA1h/view?usp=sharing" download="Gagan KM_D.pdf" style="text-decoration:none;color:black;"><b>DATA ANALYST <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
-              <a href="https://drive.google.com/file/d/17b7QCFydnSO5TupKDciQO57v7Lw6V9AT/view?usp=sharing" download="Gagan KM_DE.pdf" style="text-decoration:none;"><b>DevOps ENGINEER <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
-              <a href="https://drive.google.com/file/d/1-mLHC-tZkgd_7Ivx0XGSDv-X-nv-Gvsn/view?usp=sharing" download="Gagan KM_S.pdf" style="text-decoration:none;color: black;"><b>SOFTWARE ENGINEER <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
-              <a href="https://drive.google.com/file/d/1dGzk1qNIJepNdt0WFGBnwep3ob1ldr3l/view?usp=sharing" download="Gagan KM_P.pdf" style="text-decoration:none;"><b>POWER-BI DEVELOPER <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
-            </div><br>
-        </div>
-      </div>
-    </section><!-- End My Resume Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container position-relative">
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/arthi.jpg" class="testimonial-img" alt="">
-                <h3>S Arthi</h3>
-                <h4>Bestestesssssssttttttttt Friend :) </h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  My Constant, You were every where in my life in this college Life- Ur caring and ur fights are all always nice.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/aisiri.jpg" class="testimonial-img" alt="">
-                <h3>Aisiri P</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Planner of the trip,we nearly never took,but the hype was real . But we enjoyed moments with you.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/shravani.jpg" class="testimonial-img" alt="">
-                <h3>Shravani</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Thanks for being the best part of my journey☺.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/abish.jpg" class="testimonial-img" alt="">
-                <h3>Abishyanth</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  THANK YOU For the best bus ride of my life....owe you a lot Gagan❤.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/shrunga.jpg" class="testimonial-img" alt="">
-                <h3>Shrunga</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Brother From Another Mother, Lots of LOVE💝.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/manish.jpg" class="testimonial-img" alt="">
-                <h3>Manish</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  u r a darkness in light,a sheep in form of wolf , a sweet world in a bitter flavour😂.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/srujana.jpg" class="testimonial-img" alt="">
-                <h3>Srujana</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Scooty Partner(1yr)🛵 , Almost Crashed :) ,#GANJA #POOGAN👨‍👩‍👦.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/varsha.jpg" class="testimonial-img" alt="">
-                <h3>Varsha MK</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Gagan Anna, My Kinder Joy Supplier. Been a friend ,Best Friend,Enemy at IPL times.Bus Partner and Made one good change in my life Decisions, Late comer , Job aadmele Innu Kinder Joy Supply Madu....
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/samartha.jpg" class="testimonial-img" alt="">
-                <h3>Samartha Gowda</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Thanks for Being my Best Buddy Bro.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/vamshi.jpg" class="testimonial-img" alt="">
-                <h3>Vamshi S</h3>
-                <h4>Kattappa</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Nina Preethiya kattappa
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/abhi.jpg" class="testimonial-img" alt="">
-                <h3> Abhisheik </h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Memories Forever Be Happy 🤩.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/ajeesh.jpg" class="testimonial-img" alt="">
-                <h3>Ajeesh Reegan</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  ---------------------
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <img src="assets/img/durgesh.jpg" class="testimonial-img" alt="">
-                <h3>Durgesh Babu</h3>
-                <h4>Best Friend</h4>
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  --------------------------------.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-
-    <!-- ======= My Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-
-        <div class="section-title">
-          <span>My Portfolio</span>
-          <h2>My Portfolio</h2>
-          <p>know more about Me</p>
-        </div>
-
-        <ul id="portfolio-flters" class="d-flex justify-content-center">
-          <li data-filter="*" class="filter-active">All</li>
-          <li data-filter=".filter-academic">Academic</li>
-          <li data-filter=".filter-cultural">Culturals</li>
-          <li data-filter=".filter-friends">Friends</li>
-        </ul>
-
-        <div class="row portfolio-container">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-cultural">
-            <div class="portfolio-img"><img src="assets/img/portfolio/clg.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Karnataka Rajyotsava</h4>
-              <p>College</p>
-              <a href="assets/img/portfolio/clg.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Karnataka Rajyotsava"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/sjbit.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>HACKATHON</h4>
-              <p>SJBIT</p>
-              <a href="assets/img/portfolio/sjbit.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="we actively participated in SJBIT Hackathon"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/mevi.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>INTERNSHIP</h4>
-              <p>MEVI TECHNOLOGY</p>
-              <a href="assets/img/portfolio/mevi.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Mevi Tecnology INTERNSHIP"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-cultural">
-            <div class="portfolio-img"><img src="assets/img/portfolio/COLLEGE1.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>TEACHER'S DAY</h4>
-              <p>College</p>
-              <a href="assets/img/portfolio/COLLEGE1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="We Celebrated our Teachers day"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/college.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML UNITY CODE</h4>
-              <p>college</p>
-              <a href="assets/img/portfolio/college.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="AMIL Dress Code"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/friends.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>FRIENDS</h4>
-              <p>LIFE-TIME</p>
-              <a href="assets/img/portfolio/friends.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="prends"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/frirndsss.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>FRIENDS</h4>
-              <p>LIFE-TIME</p>
-              <a href="assets/img/portfolio/frirndsss.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="we Friends in Karnataka Rajyotsava 2k23"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/school.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>School Activity</h4>
-              <p>Kengeri</p>
-              <a href="assets/img/portfolio/school.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Children Development Intiative"><i class="bx bx-plus"></i></a>
-              </div>
-          </div>
-
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-cultural">
-            <div class="portfolio-img"><img src="assets/img/portfolio/prends.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>FRIENDS</h4>
-              <p>LIFE-TIME</p>
-              <a href="assets/img/portfolio/prends.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Etnic Day in college ,Kalasourabha 24"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/me_trophy.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Me</h4>
-              <p>DEPARMENT TROPHY</p>
-              <a href="assets/img/portfolio/me_trophy.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="The Coach of DEPARMENT"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/friends_2.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>FRIENDS</h4>
-              <p>Ramdevrbetta ,Ramnagara</p>
-              <a href="assets/img/portfolio/friends_2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Ramdevrbetta ,Ramnagara "><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/dept_trophy.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>Trophy Winning Moments</p>
-              <a href="assets/img/portfolio/dept_trophy.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="OUR Boys who all contributed to the victory"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/sports_1.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>Trophy Winning Moments</p>
-              <a href="assets/img/portfolio/sports_1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="OUR Volleyball Team"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/winning_moment.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>Trophy Winning Moments</p>
-              <a href="assets/img/portfolio/winning_moment.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="AIML Family Winning Moment"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/project.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>Project Expo</p>
-              <a href="assets/img/portfolio/project.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Our Team Represented Our Department iin Project Expo conducted by the  College"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/purple.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>BEST FRIENDS</p>
-              <a href="assets/img/portfolio/purple.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="MY BEST FRIENDS"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/Farewell.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>FAREWELL DAY </p>
-              <a href="assets/img/portfolio/Farewell.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="2nd Farewell Celebration for AIML Department,2025"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-academic">
-            <div class="portfolio-img"><img src="assets/img/portfolio/Graduation.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>Graduation Day</p>
-              <a href="assets/img/portfolio/Graduation.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="16th Graduation Day , RRCE 2025"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/Group1.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>BEST FRIENDS</p>
-              <a href="assets/img/portfolio/Group1.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="MY BEST FRIENDS"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-friends">
-            <div class="portfolio-img"><img src="assets/img/portfolio/Group2.jpeg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>AIML</h4>
-              <p>BEST FRIENDS</p>
-              <a href="assets/img/portfolio/Group2.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="MY BEST FRIENDS"><i class="bx bx-plus"></i></a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End My Portfolio Section -->
-
-
-    <!-- ======= Contact Me Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <span>Contact Me</span>
-          <h2>Contact Me</h2>
-          </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-
-            <div class="row">
-              <div class="col-md-12">
-                <div class="info-box">
-                  <i class="bx bx-share-alt"></i>
-                  <h3>Social Profiles</h3>
-                  <div class="social-links">
-                    <a href="https://github.com/gagankm27" class="twitter"><i class="bi bi-github"></i></a>
-                    <a href="https://www.facebook.com/gagan.km.714" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.instagram.com/gagan_km27/" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                  </div>
+                <div class="section-title">
+                    <span>Contact Me</span>
+                    <h2>Contact Me</h2>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-envelope"></i>
-                  <h3>Email Me</h3>
-                  <p>kmgagan662@gmail.com</p>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-8">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="info-box contact-social-box">
+                                    <i class="bx bx-share-alt"></i>
+                                    <h3>Social Profiles</h3>
+                                    <div class="social-links">
+                                        <a href="https://github.com/gagankm27" class="contact-social-btn github-btn"><i
+                                                class="bi bi-github"></i></a>
+                                        <a href="https://www.facebook.com/gagan.km.714"
+                                            class="contact-social-btn facebook-btn"><i class="bi bi-facebook"></i></a>
+                                        <a href="https://www.instagram.com/gagan_km27/"
+                                            class="contact-social-btn instagram-btn"><i class="bi bi-instagram"></i></a>
+                                        <a href="https://www.linkedin.com/in/gagan-k-m-425167277/"
+                                            class="contact-social-btn linkedin-btn"><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4 contact-info-highlight">
+                                    <i class="bx bx-envelope"></i>
+                                    <h3>Email Me</h3>
+                                    <p>kmgagan662@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4 contact-info-highlight">
+                                    <i class="bx bx-phone-call"></i>
+                                    <h3>Call Me</h3>
+                                    <p>+91 7406335619</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-phone-call"></i>
-                  <h3>Call Me</h3>
-                  <p>+91 7406335619</p>
-                </div>
-              </div>
+
+                <style>
+                    /* Enhanced Social Media Hover Effects */
+                    .contact-social-btn {
+                        font-size: 20px !important;
+                        display: inline-flex !important;
+                        align-items: center;
+                        justify-content: center;
+                        color: #687683 !important;
+                        width: 50px !important;
+                        height: 50px !important;
+                        margin: 0 10px !important;
+                        border-radius: 50% !important;
+                        border: 2px solid #dde1e4 !important;
+                        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .contact-social-btn:hover {
+                        transform: translateY(-6px) scale(1.1) !important;
+                        color: #fff !important;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+                    }
+
+                    .github-btn:hover {
+                        background: #333 !important;
+                        border-color: #333 !important;
+                        box-shadow: 0 10px 25px rgba(51, 51, 51, 0.4) !important;
+                    }
+
+                    .facebook-btn:hover {
+                        background: #1877F2 !important;
+                        border-color: #1877F2 !important;
+                        box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4) !important;
+                    }
+
+                    .instagram-btn:hover {
+                        background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+                        border-color: #dc2743 !important;
+                        box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4) !important;
+                    }
+
+                    .linkedin-btn:hover {
+                        background: #0A66C2 !important;
+                        border-color: #0A66C2 !important;
+                        box-shadow: 0 10px 25px rgba(10, 102, 194, 0.4) !important;
+                    }
+
+                    /* Info Box Hover Highlight */
+                    .contact-info-highlight {
+                        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+                        cursor: default;
+                        border: 1px solid transparent;
+                    }
+
+                    .contact-info-highlight:hover {
+                        transform: translateY(-8px);
+                        box-shadow: 0 15px 40px rgba(255, 183, 39, 0.2), 0 0 0 2px rgba(255, 183, 39, 0.3) !important;
+                        border-color: #ffb727;
+                    }
+
+                    .contact-info-highlight:hover i.bx {
+                        background: #ffb727 !important;
+                        color: #fff !important;
+                        transform: scale(1.15);
+                        transition: all 0.3s ease;
+                    }
+
+                    .contact-info-highlight:hover h3 {
+                        color: #ffb727 !important;
+                        transition: color 0.3s ease;
+                    }
+
+                    /* Social Box Hover */
+                    .contact-social-box {
+                        transition: all 0.4s ease !important;
+                        border: 1px solid transparent;
+                    }
+
+                    .contact-social-box:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 12px 35px rgba(255, 183, 39, 0.15), 0 0 0 2px rgba(255, 183, 39, 0.25) !important;
+                        border-color: #ffb727;
+                    }
+                </style>
+
             </div>
+        </section><!-- End Contact Me Section -->
 
-          </div>
+    </main><!-- End #main -->
 
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <h3>Gagan KM</h3>
+            <p>Thanks for taking a glance of my portfolio Website .</p>
+            <div class="social-links">
+                <a href="https://github.com/gagankm27" class="twitter"><i class="bi bi-github"></i></a>
+                <a href="https://www.facebook.com/gagan.km.714" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com/gagan_km27/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="linkedin"><i
+                        class="bx bxl-linkedin"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; Copyright <strong><span>Gagan</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                An Idea From <a href="https://youtube.com/">Youtube</a>
+                <!-- An Idea From <a href="https://bootstrapmade.com/">Youtube</a> -->
+            </div>
         </div>
+    </footer><!-- End Footer -->
 
-      </div>
-    </section><!-- End Contact Me Section -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-  </main><!-- End #main -->
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <h3>Gagan KM</h3>
-      <p>Thanks for taking a glance of my portfolio Website .</p>
-      <div class="social-links">
-        <a href="https://github.com/gagankm27" class="twitter"><i class="bi bi-github"></i></a>
-        <a href="https://www.facebook.com/gagan.km.714" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="https://www.instagram.com/gagan_km27/" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-      </div>
-      <div class="copyright">
-        &copy; Copyright <strong><span>Gagan</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        An Idea From <a href="https://youtube.com/">Youtube</a>
-        <!-- An Idea From <a href="https://bootstrapmade.com/">Youtube</a> -->
-      </div>
-    </div>
-  </footer><!-- End Footer -->
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Album Player Script -->
+    <script>
+        // ===== ALBUM DATA =====
+        let albums = [
+            {
+                title: "Cultural Celebrations",
+                desc: "Relive the vibrant cultural celebrations at college — from the grandeur of Karnataka Rajyotsava to the warmth of Teacher's Day and the colorful energy of Kalasourabha 2024. These moments captured the spirit, pride, and togetherness of our college community.",
+                category: "Cultural • College",
+                cover: "assets/img/portfolio/clg.jpg",
+                images: [
+                    "assets/img/portfolio/clg.jpg",
+                    "assets/img/portfolio/COLLEGE1.jpg",
+                    "assets/img/portfolio/prends.jpg",
+                    "assets/img/portfolio/college.jpg"
+                ]
+            },
+            {
+                title: "Academic Highlights",
+                desc: "A journey through the academic milestones — from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
+                category: "Academic • Achievement",
+                cover: "assets/img/portfolio/sjbit.jpg",
+                images: [
+                    "assets/img/portfolio/sjbit.jpg",
+                    "assets/img/portfolio/mevi.jpg",
+                    "assets/img/portfolio/project.jpg",
+                    "assets/img/portfolio/school.jpg",
+                    "assets/img/portfolio/college.jpg"
+                ]
+            },
+            {
+                title: "Friends Forever",
+                desc: "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
+                category: "Friends • Lifetime",
+                cover: "assets/img/portfolio/friends.jpg",
+                images: [
+                    "assets/img/portfolio/friends.jpg",
+                    "assets/img/portfolio/frirndsss.jpg",
+                    "assets/img/portfolio/friends_2.jpg",
+                    "assets/img/portfolio/prends.jpg",
+                    "assets/img/portfolio/Group1.jpeg",
+                    "assets/img/portfolio/Group2.jpeg"
+                ]
+            },
+            {
+                title: "Trophy Moments",
+                desc: "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments — from volleyball championships to department victories — are proof that teamwork makes the dream work.",
+                category: "Sports • Victory",
+                cover: "assets/img/portfolio/me_trophy.jpg",
+                images: [
+                    "assets/img/portfolio/me_trophy.jpg",
+                    "assets/img/portfolio/dept_trophy.jpg",
+                    "assets/img/portfolio/sports_1.jpg",
+                    "assets/img/portfolio/winning_moment.jpg"
+                ]
+            },
+            {
+                title: "Farewell & Graduation",
+                desc: "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell — where tears met smiles, and memories were sealed forever.",
+                category: "Farewell • 2025",
+                cover: "assets/img/portfolio/Graduation.jpeg",
+                images: [
+                    "assets/img/portfolio/Graduation.jpeg",
+                    "assets/img/portfolio/Farewell.jpg"
+                ]
+            },
+            {
+                title: "Best Friends",
+                desc: "Some bonds go beyond college walls. These are my best friends — the AIML family who stood by me through thick and thin. From purple-themed days to group celebrations, every frame tells a story of love and loyalty.",
+                category: "Friends • AIML",
+                cover: "assets/img/portfolio/purple.jpg",
+                images: [
+                    "assets/img/portfolio/purple.jpg",
+                    "assets/img/portfolio/Group1.jpeg",
+                    "assets/img/portfolio/Group2.jpeg"
+                ]
+            }
+        ];
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+        // ===== DYNAMIC GRID RENDER =====
+        async function fetchAlbums() {
+            try {
+                const response = await fetch('/api/albums');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && data.length > 0) {
+                        albums = data;
+                    }
+                }
+            } catch (err) {
+                console.error("Error fetching albums:", err);
+            }
+            renderPortfolioGrid();
+        }
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+        function renderPortfolioGrid() {
+            const grid = document.getElementById('album-grid');
+            grid.innerHTML = '';
+            
+            albums.forEach((album, index) => {
+                const tags = (album.category || '').split('•').map(t => t.trim()).filter(Boolean);
+                const tagsHtml = tags.map(t => `<span class="genre-tag">${t}</span>`).join('');
+                const filterClass = album.filterClass || 'filter-academic';
+
+                grid.innerHTML += `
+                    <div class="col-lg-4 col-md-6 portfolio-item ${filterClass}" onclick="openAlbum(${index})">
+                        <div class="album-card">
+                            <div class="album-poster">
+                                <img src="${album.cover || ''}" class="img-fluid" alt="${album.title}">
+                                <div class="album-gradient"></div>
+                                <div class="album-badge">${(album.images || []).length} Photos</div>
+                            </div>
+                            <div class="album-card-info">
+                                <h4 class="album-title">${album.title}</h4>
+                                <p class="album-genre">${tagsHtml}</p>
+                                <p class="album-desc">${album.desc}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Re-init or reload isotope if available
+            if (window.portfolioIsotope) {
+                window.portfolioIsotope.reloadItems();
+                window.portfolioIsotope.arrange();
+            }
+        }
+
+        // Initial render on load
+        window.addEventListener('DOMContentLoaded', fetchAlbums);
+
+        let currentAlbumIndex = -1;
+        let currentPhotoIndex = 0;
+        let isPlaying = false;
+        let playInterval = null;
+        let progressInterval = null;
+        let progressValue = 0;
+        const SLIDE_DURATION = 4000; // 4 seconds per photo
+
+        // ===== OPEN ALBUM DETAIL =====
+        function openAlbum(index) {
+            currentAlbumIndex = index;
+            const album = albums[index];
+
+            // Set hero background
+            const heroEl = document.getElementById('album-detail-hero');
+            heroEl.style.backgroundImage = `url('${album.cover}')`;
+
+            // Set text content
+            document.getElementById('album-detail-title').textContent = album.title;
+            document.getElementById('album-detail-desc').textContent = album.desc;
+            document.getElementById('album-photo-count').textContent = album.images.length + ' Photos';
+            document.getElementById('album-category').textContent = album.category;
+
+            // Build thumbnail strip
+            const thumbScroll = document.getElementById('thumb-scroll');
+            thumbScroll.innerHTML = '';
+            album.images.forEach((img, i) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'thumb-item';
+                thumb.onclick = (e) => {
+                    e.stopPropagation();
+                    currentPhotoIndex = i;
+                    playAlbum();
+                };
+                thumb.innerHTML = `
+          <img src="${img}" alt="Scene ${i + 1}">
+          <span class="thumb-number">${i + 1}</span>
+        `;
+                thumbScroll.appendChild(thumb);
+            });
+
+            // Show overlay
+            const overlay = document.getElementById('album-detail-overlay');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ===== CLOSE ALBUM DETAIL =====
+        function closeAlbum() {
+            document.getElementById('album-detail-overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== PLAY ALBUM (Movie Mode) =====
+        function playAlbum() {
+            if (currentAlbumIndex < 0) return;
+            const album = albums[currentAlbumIndex];
+
+            // Show player
+            const player = document.getElementById('photo-player');
+            player.classList.add('active');
+
+            // Set title
+            document.getElementById('player-title').textContent = album.title;
+
+            // Start from current photo
+            isPlaying = true;
+            updatePlayPauseIcon();
+            showPhoto(currentPhotoIndex);
+            startAutoPlay();
+        }
+
+        // ===== SHOW PHOTO =====
+        function showPhoto(index) {
+            const album = albums[currentAlbumIndex];
+            if (index < 0 || index >= album.images.length) return;
+
+            currentPhotoIndex = index;
+            const imgEl = document.getElementById('player-image');
+
+            // Fade animation
+            imgEl.style.animation = 'none';
+            imgEl.offsetHeight; // trigger reflow
+            imgEl.style.animation = 'playerFadeIn 0.6s ease';
+
+            imgEl.src = album.images[index];
+            document.getElementById('player-counter').textContent = `${index + 1} / ${album.images.length}`;
+
+            // Reset progress
+            progressValue = 0;
+            updateProgress();
+        }
+
+        // ===== AUTO PLAY =====
+        function startAutoPlay() {
+            stopAutoPlay();
+            isPlaying = true;
+            updatePlayPauseIcon();
+
+            progressValue = 0;
+            const progressStep = 50; // ms
+            progressInterval = setInterval(() => {
+                progressValue += (progressStep / SLIDE_DURATION) * 100;
+                updateProgress();
+            }, progressStep);
+
+            playInterval = setInterval(() => {
+                const album = albums[currentAlbumIndex];
+                currentPhotoIndex++;
+                if (currentPhotoIndex >= album.images.length) {
+                    currentPhotoIndex = 0;
+                }
+                progressValue = 0;
+                showPhoto(currentPhotoIndex);
+            }, SLIDE_DURATION);
+        }
+
+        function stopAutoPlay() {
+            clearInterval(playInterval);
+            clearInterval(progressInterval);
+            playInterval = null;
+            progressInterval = null;
+            isPlaying = false;
+            updatePlayPauseIcon();
+        }
+
+        function updateProgress() {
+            document.getElementById('player-progress').style.width = Math.min(progressValue, 100) + '%';
+        }
+
+        // ===== CONTROLS =====
+        function togglePlayPause() {
+            if (isPlaying) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function updatePlayPauseIcon() {
+            const icon = document.getElementById('play-pause-icon');
+            icon.className = isPlaying ? 'bi bi-pause-fill' : 'bi bi-play-fill';
+        }
+
+        function nextPhoto() {
+            const album = albums[currentAlbumIndex];
+            currentPhotoIndex = (currentPhotoIndex + 1) % album.images.length;
+            showPhoto(currentPhotoIndex);
+            if (isPlaying) startAutoPlay();
+        }
+
+        function prevPhoto() {
+            const album = albums[currentAlbumIndex];
+            currentPhotoIndex = (currentPhotoIndex - 1 + album.images.length) % album.images.length;
+            showPhoto(currentPhotoIndex);
+            if (isPlaying) startAutoPlay();
+        }
+
+        function closePlayer() {
+            stopAutoPlay();
+            document.getElementById('photo-player').classList.remove('active');
+            currentPhotoIndex = 0;
+        }
+
+        // ===== KEYBOARD CONTROLS =====
+        document.addEventListener('keydown', (e) => {
+            const player = document.getElementById('photo-player');
+            const overlay = document.getElementById('album-detail-overlay');
+
+            if (player.classList.contains('active')) {
+                if (e.key === 'Escape') closePlayer();
+                if (e.key === 'ArrowRight') nextPhoto();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === ' ') { e.preventDefault(); togglePlayPause(); }
+            } else if (overlay.classList.contains('active')) {
+                if (e.key === 'Escape') closeAlbum();
+            }
+        });
+    </script>
 
 </body>
 

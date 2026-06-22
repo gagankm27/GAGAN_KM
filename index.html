@@ -758,8 +758,6 @@
                 <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
                 <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="nav-link nav-admin-btn" href="/login" title="Admin Panel"><i
-                            class="bi bi-shield-lock-fill"></i> Admin</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -993,6 +991,75 @@
                 box-shadow: 0 10px 25px rgba(255, 183, 39, 0.25);
             }
 
+            /* Interest Pills */
+            .about-interests {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 30px;
+            }
+
+            .interest-pill {
+                padding: 7px 16px;
+                background: #f5f7fa;
+                border: 1px solid #e1e4e8;
+                border-radius: 50px;
+                color: #5c6773;
+                font-size: 13px;
+                font-weight: 500;
+                font-family: "Open Sans", sans-serif;
+                transition: all 0.3s ease;
+                cursor: default;
+            }
+
+            .interest-pill:hover {
+                background: #ffb727;
+                border-color: #ffb727;
+                color: #ffffff;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(255, 183, 39, 0.25);
+            }
+
+            /* Branded social buttons */
+            .about-social-btn {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 22px;
+                border-radius: 10px;
+                font-family: "Open Sans", sans-serif;
+                font-size: 14px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border: none;
+            }
+
+            .about-social-btn i { font-size: 18px; }
+
+            .about-social-btn.linkedin {
+                background: #0a66c2;
+                color: #fff;
+                box-shadow: 0 6px 16px rgba(10, 102, 194, 0.25);
+            }
+
+            .about-social-btn.github {
+                background: #24292e;
+                color: #fff;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            }
+
+            .about-social-btn.instagram {
+                background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+                color: #fff;
+                box-shadow: 0 6px 16px rgba(220, 39, 67, 0.25);
+            }
+
+            .about-social-btn:hover {
+                transform: translateY(-4px);
+                filter: brightness(1.12);
+            }
+
             @media (max-width: 991px) {
                 .modern-about {
                     min-height: auto;
@@ -1054,16 +1121,26 @@
                                 unforgettable experiences. ✨🏏🎵✈️🍿
                             </p>
 
+                            <!-- Interest Pills -->
+                            <div class="about-interests">
+                                <div class="interest-pill">&#x1F3CF; Cricket</div>
+                                <div class="interest-pill">&#x2708;&#xFE0F; Travel</div>
+                                <div class="interest-pill">&#x1F3B5; Music</div>
+                                <div class="interest-pill">&#x1F37F; Movies</div>
+                                <div class="interest-pill">&#x1F4BB; Tech</div>
+                                <div class="interest-pill">&#x1F4F8; Photography</div>
+                            </div>
+
+                            <!-- Branded Social Buttons -->
                             <div class="modern-socials">
-                                <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="m-social-btn"
-                                    target="_blank">
-                                    <i class="bi bi-linkedin"></i> <span>LinkedIn</span>
+                                <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="about-social-btn linkedin" target="_blank">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
                                 </a>
-                                <a href="https://github.com/gagankm27" class="m-social-btn" target="_blank">
-                                    <i class="bi bi-github"></i> <span>GitHub</span>
+                                <a href="https://github.com/gagankm27" class="about-social-btn github" target="_blank">
+                                    <i class="bi bi-github"></i> GitHub
                                 </a>
-                                <a href="https://www.instagram.com/gagan_km27/" class="m-social-btn" target="_blank">
-                                    <i class="bi bi-instagram"></i> <span>Instagram</span>
+                                <a href="https://www.instagram.com/gagan_km27/" class="about-social-btn instagram" target="_blank">
+                                    <i class="bi bi-instagram"></i> Instagram
                                 </a>
                             </div>
                         </div>
@@ -1072,6 +1149,9 @@
 
             </div>
         </section><!-- End About Me Section -->
+
+        <!-- Section Divider -->
+        <div style="width:100%; height:1px; background: linear-gradient(90deg, transparent, #ffb727 30%, #ffb727 70%, transparent); opacity: 0.35;"></div>
 
         <!-- ======= My Resume Section ======= -->
         <section id="resume" class="resume">
@@ -1732,7 +1812,8 @@
         // ===== DYNAMIC GRID RENDER =====
         async function fetchAlbums() {
             try {
-                const response = await fetch('/api/albums');
+                // Static version: load from data.json directly (GitHub Pages compatible)
+                const response = await fetch('data.json');
                 if (response.ok) {
                     const data = await response.json();
                     if (data && data.length > 0) {

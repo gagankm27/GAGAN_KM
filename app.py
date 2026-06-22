@@ -86,7 +86,16 @@ def login_required(f):
 # ── Public pages ──────────────────────────────────────────────────────────
 @app.route('/')
 def index():
+    return send_from_directory('.', 'main.html')
+
+@app.route('/index.html')
+def static_index():
     return send_from_directory('.', 'index.html')
+
+@app.route('/data.json')
+def serve_data_json():
+    """Serve data.json so index.html (static version) can fetch album data locally too."""
+    return send_from_directory('.', 'data.json', mimetype='application/json')
 
 @app.route('/login')
 def login_page():
@@ -127,6 +136,20 @@ def auth_check():
 @app.route('/api/albums', methods=['GET'])
 def get_albums():
     return jsonify(load_data())
+
+# ── Hero Images API ───────────────────────────────────────────────────────
+HERO_DIR = os.path.join('assets', 'img', 'Hero')
+ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.gif'}
+
+@app.route('/api/hero-images', methods=['GET'])
+def get_hero_images():
+    os.makedirs(HERO_DIR, exist_ok=True)
+    images = []
+    for f in sorted(os.listdir(HERO_DIR)):
+        ext = os.path.splitext(f)[1].lower()
+        if ext in ALLOWED_EXTENSIONS:
+            images.append(f'assets/img/Hero/{f}')
+    return jsonify(images)
 
 @app.route('/api/albums', methods=['POST'])
 @login_required

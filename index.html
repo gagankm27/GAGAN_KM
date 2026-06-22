@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Gagan portpholio-bootscrap</title>
+    <title>Gagan K M</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -723,12 +723,99 @@
 
     <!-- ======= Hero Section ======= -->
     <section id="hero">
+
+        <!-- Slideshow backgrounds -->
+        <div class="hero-slide active" style="background-image: url('assets/img/hero/hero-bg.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('assets/img/hero/w.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('assets/img/hero/x.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('assets/img/hero/y.jpg');"></div>
+
+        <!-- Hero content -->
         <div class="hero-container">
             <h1>Gagan KM</h1>
-            <h2>An AIML Graduate</h2>
+            <h2>An AI ENGINEER</h2>
             <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
         </div>
+
+        <!-- Progress dots -->
+        <div class="hero-dots" id="heroDots">
+            <div class="hero-dot active" onclick="goToSlide(0)">
+                <div class="hero-dot-progress"></div>
+            </div>
+            <div class="hero-dot" onclick="goToSlide(1)">
+                <div class="hero-dot-progress"></div>
+            </div>
+            <div class="hero-dot" onclick="goToSlide(2)">
+                <div class="hero-dot-progress"></div>
+            </div>
+            <div class="hero-dot" onclick="goToSlide(3)">
+                <div class="hero-dot-progress"></div>
+            </div>
+        </div>
+
     </section><!-- End Hero -->
+
+    <script>
+        (function () {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.hero-dot');
+            let current = 0;
+            let timer = null;
+
+            function goToSlide(index) {
+                // Exit current slide
+                slides[current].classList.remove('active');
+                slides[current].classList.add('exit');
+                dots[current].classList.remove('active');
+
+                // Force reflow so dot animation restarts
+                dots[current].querySelector('.hero-dot-progress').style.animation = 'none';
+                void dots[current].offsetHeight;
+                slides[current].querySelector && void slides[current].offsetHeight;
+
+                // Clean up exit class after transition
+                const exitSlide = slides[current];
+                setTimeout(() => exitSlide.classList.remove('exit'), 1400);
+
+                current = index;
+
+                // Activate new slide with reveal-in
+                slides[current].classList.remove('exit');
+                slides[current].classList.add('reveal-in');
+                dots[current].classList.add('active');
+
+                // Reset dot progress animation
+                const dp = dots[current].querySelector('.hero-dot-progress');
+                dp.style.animation = 'none';
+                void dp.offsetHeight;
+                dp.style.animation = '';
+
+                // After reveal finishes, switch to standard active class (keeps Ken Burns)
+                setTimeout(() => {
+                    slides[current].classList.remove('reveal-in');
+                    slides[current].classList.add('active');
+                }, 1200);
+
+                resetTimer();
+            }
+
+            function nextSlide() {
+                goToSlide((current + 1) % slides.length);
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(nextSlide, 5000);
+            }
+
+            // Expose globally for onclick
+            window.goToSlide = goToSlide;
+
+            // Start
+            resetTimer();
+        })();
+    </script>
+
 
     <main id="main">
 
@@ -829,11 +916,13 @@
                         <h3 class="resume-title">SUMMARY</h3>
                         <div class="resume-item pb-0">
                             <h4>Gagan KM</h4>
-                            <p><em>DevOps and AWS Engineer specializing in cloud automation, CI/CD pipeline development,
-                                    and container orchestration with Docker and Kubernetes. Skilled in designing
-                                    scalable, secure, and cost-efficient AWS infrastructures, with a strong foundation
-                                    in automation and cloud-native tools. A motivated fresher eager to learn, adapt, and
-                                    contribute to delivering high-quality, reliable solutions.</em></p>
+                            <p><em>AI enthusiast by profession and explorer by heart. I enjoy building things with
+                                    technology, solving problems, and constantly learning something new. Outside of
+                                    work, cricket is my favorite way to unwind, and you'll often find me spending time
+                                    with friends, whether it's a casual meetup, a long drive, or an unplanned adventure.
+                                    I love traveling, discovering new places, watching movies, listening to music, and
+                                    making the most of every moment. For me, life is all about balancing ambition, good
+                                    company, and unforgettable experiences. ✨🏏🎵✈️🍿</em></p>
                             <p>
                             <ul>
                                 <li><i class="bi bi-linkedin"> </i><b>Linkedin:</b> <a
@@ -865,20 +954,10 @@
                         <div class="resume-item">
                             <h4>CERTIFICATION</h4>
                             <ul>
-                                <li><B>POWER BI</B> DEVELOPMENT</li>
-                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
-                                        style="color: rgb(17, 9, 9);"><b>AWS</b> APAC <b>Solutions Architecture</b>
-                                        virtual experience.</a></li>
                                 <li><b>CAPGEMINI</b> Certification on SOFT SKILLS and CRM Using <B>SALESFORCE</B></li>
-                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
-                                        style="color: rgb(17, 9, 9);"> <b>TATA</b> Groups <b>GenAI Powered Data
-                                            Analytics</b>.</a></li>
                                 <li><b>BEST PAPER AWARD</b> in International Conference on Recent Trends in
                                     Computational Engineering and Technologies on <b>"Smart Home Automation"</b>
                                     (IJMRSET, 2024)</li>
-                                <li><a href="https://www.theforage.com/simulations/deloitte-au/data-analytics-s5zy"
-                                        style="color: rgb(17, 9, 9);"> <b>Deloitte</b> Australia <b>Data Analytics</b>
-                                        Job Simulation.</a></li>
                             </ul>
                         </div>
                     </div>
@@ -901,31 +980,41 @@
                         </div>
 
                         <div class="resume-item">
-                            <h5>INTERN</h5>
+                            <h5><b>FULL TIME</b></h5>
+                            <h5><b>2025-Present</b></h5>
                             <p>
                             <ul>
-                                <li>ROLE : <B>POWER-BI DEVELOPER</B></li>
-                                <li>Designing, developing, and maintaining interactive Power BI dashboards that present
-                                    key business metrics, sales performance, and operational trends in a visually
-                                    compelling and actionable format.</li>
-                                <li>Writing and optimizing SQL queries to extract, manipulate, and join datasets from
-                                    multiple databases, while leveraging Excel for advanced calculations, data
-                                    validation, and ad-hoc analytical tasks.</li>
-                                <li>Utilizing Power Query to clean, transform, and integrate large volumes of raw data
-                                    from diverse sources, ensuring accuracy, consistency, and readiness for reporting
-                                    and dashboard visualization.</li>
+                                <li>ROLE : <B>AI ENGINEER</B></li>
+                                <li>Designing, developing, and deploying AI-powered applications that leverage Large
+                                    Language Models (LLMs), computer vision, multimodal AI, and machine learning
+                                    techniques to automate analysis, generate insights, and improve operational
+                                    decision-making.</li>
+                                <li>Developing intelligent document processing systems capable of extracting,
+                                    structuring, summarizing, and analyzing information from PDFs, reports, images, and
+                                    unstructured content using NLP and Retrieval-Augmented Generation (RAG)
+                                    architectures.</li>
+                                <li>Implementing computer vision and video analytics solutions for object detection,
+                                    anomaly detection, surveillance monitoring, deepfake analysis, and real-time event
+                                    recognition using pre-trained and custom AI models.</li>
+                                <li>Deploying and managing AI applications on cloud platforms using containerization,
+                                    CI/CD pipelines, DevOps practices, and infrastructure automation to ensure
+                                    scalability, reliability, and high availability.</li>
                             </ul>
                             </p>
                         </div>
                     </div>
 
                     <div class="col-lg-6" style="a:hover{color: brown;}">
-                        <h3 class="resume-title">Resume</h3>
+                        <h3 class="resume-title">RESUME</h3>
                         <div class="resume-item pb-0">
                             <a href="https://drive.google.com/file/d/1boeWmGik6lumwhxP1nP_-XiyyldrPUEg/view?usp=drive_link"
-                                download="Gagan KM_C.pdf" style="text-decoration:none;"><b>CLOUD ENGINEER <i
-                                        class="bi bi-box-arrow-up-right"></i></b></a> &nbsp;
-                            <a href="https://drive.google.com/file/d/1a2AxWpZkOTgnfss5Qkox16TCK8_uaA1h/view?usp=sharing"
+                                download="Gagan KM_C.pdf" style="text-decoration:none;"><b>AI ENGINEER <i
+                                        class="bi bi-box-arrow-up-right"></i></b></a>experienced in
+                            building and deploying AI-powered applications using LLMs, Machine Learning, Computer
+                            Vision, and Generative AI technologies. Skilled in RAG, LangChain, Python
+                            Development, AWS, Docker, Kubernetes, and DevOps for scalable enterprise solutions.
+                            &nbsp;
+                            <!-- <a href="https://drive.google.com/file/d/1a2AxWpZkOTgnfss5Qkox16TCK8_uaA1h/view?usp=sharing"
                                 download="Gagan KM_D.pdf" style="text-decoration:none;color:black;"><b>DATA ANALYST <i
                                         class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
                             <a href="https://drive.google.com/file/d/17b7QCFydnSO5TupKDciQO57v7Lw6V9AT/view?usp=sharing"
@@ -936,7 +1025,7 @@
                                     ENGINEER <i class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
                             <a href="https://drive.google.com/file/d/1dGzk1qNIJepNdt0WFGBnwep3ob1ldr3l/view?usp=sharing"
                                 download="Gagan KM_P.pdf" style="text-decoration:none;"><b>POWER-BI DEVELOPER <i
-                                        class="bi bi-box-arrow-up-right"></i></b></a>&nbsp;
+                                        class="bi bi-box-arrow-up-right"></i></b></a>&nbsp; -->
                         </div><br>
                     </div>
                 </div>
@@ -1487,7 +1576,7 @@
         function renderPortfolioGrid() {
             const grid = document.getElementById('album-grid');
             grid.innerHTML = '';
-            
+
             albums.forEach((album, index) => {
                 const tags = (album.category || '').split('•').map(t => t.trim()).filter(Boolean);
                 const tagsHtml = tags.map(t => `<span class="genre-tag">${t}</span>`).join('');

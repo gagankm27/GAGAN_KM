@@ -40,6 +40,7 @@
             cursor: pointer;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: #ffffff;
+            border: 1pt solid rgba(0, 0, 0, 0.08);
         }
 
         .album-card:hover {
@@ -715,11 +716,33 @@
                 <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
                 <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                <li><a class="nav-link nav-admin-btn" href="/login" title="Admin Panel"><i class="bi bi-shield-lock-fill"></i> Admin</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
     </header><!-- End Header -->
+
+    <style>
+        .nav-admin-btn {
+            background: linear-gradient(135deg, #ffb727, #f0a500) !important;
+            color: #0a0e14 !important;
+            border-radius: 6px !important;
+            padding: 6px 14px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.3px !important;
+            margin-left: 6px;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 0 14px rgba(255,183,39,0.3);
+        }
+        .nav-admin-btn:hover {
+            background: linear-gradient(135deg, #ffc750, #ffb727) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(255,183,39,0.5) !important;
+        }
+        .nav-admin-btn i { font-size: 13px; }
+    </style>
+
 
     <!-- ======= Hero Section ======= -->
     <section id="hero">
@@ -1229,15 +1252,17 @@
                     <p>know more about Me</p>
                 </div>
 
-                <ul id="portfolio-flters" class="d-flex justify-content-center">
-                    <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-academic">Academic</li>
-                    <li data-filter=".filter-cultural">Culturals</li>
-                    <li data-filter=".filter-friends">Friends</li>
+                <ul id="portfolio-flters" class="d-flex justify-content-center" style="display:none !important;">
+                    <!-- Filters hidden because Swiper handles it differently, or we just show all Netflix style -->
                 </ul>
 
-                <div class="row portfolio-container" id="album-grid">
-                    <!-- Dynamic albums will be rendered here by JavaScript -->
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper" id="album-grid">
+                        <!-- Dynamic albums will be rendered here by JavaScript -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev portfolio-swiper-prev"></div>
+                    <div class="swiper-button-next portfolio-swiper-next"></div>
                 </div>
 
             </div>
@@ -1575,6 +1600,13 @@
 
         function renderPortfolioGrid() {
             const grid = document.getElementById('album-grid');
+            
+            // If isotope already exists, destroy it before replacing DOM
+            if (window.portfolioIsotope) {
+                window.portfolioIsotope.destroy();
+                window.portfolioIsotope = null;
+            }
+
             grid.innerHTML = '';
 
             albums.forEach((album, index) => {
@@ -1583,7 +1615,7 @@
                 const filterClass = album.filterClass || 'filter-academic';
 
                 grid.innerHTML += `
-                    <div class="col-lg-4 col-md-6 portfolio-item ${filterClass}" onclick="openAlbum(${index})">
+                    <div class="swiper-slide portfolio-item ${filterClass}" onclick="openAlbum(${index})">
                         <div class="album-card">
                             <div class="album-poster">
                                 <img src="${album.cover || ''}" class="img-fluid" alt="${album.title}">
@@ -1600,11 +1632,31 @@
                 `;
             });
 
-            // Re-init or reload isotope if available
-            if (window.portfolioIsotope) {
-                window.portfolioIsotope.reloadItems();
-                window.portfolioIsotope.arrange();
+            // Initialize or Re-initialize Swiper
+            if (window.portfolioSwiper) {
+                window.portfolioSwiper.destroy(true, true);
             }
+            
+            window.portfolioSwiper = new Swiper('.portfolio-swiper', {
+                speed: 600,
+                loop: false,
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'bullets',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.portfolio-swiper-next',
+                    prevEl: '.portfolio-swiper-prev',
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1, spaceBetween: 20 },
+                    768: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 'auto', spaceBetween: 30 }
+                }
+            });
         }
 
         // Initial render on load

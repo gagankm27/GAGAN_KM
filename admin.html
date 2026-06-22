@@ -518,6 +518,19 @@
       .main-panel, .admin-header .inner, .stats-bar { padding-left: 16px; padding-right: 16px; }
     }
   </style>
+
+  <script>
+    // Auth guard — redirect to login if not authenticated
+    (async () => {
+      try {
+        const r = await fetch('/api/auth-check');
+        const d = await r.json();
+        if (!d.logged_in) window.location.href = '/login';
+      } catch(e) {
+        window.location.href = '/login';
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -526,12 +539,17 @@
   <header class="admin-header">
     <div class="inner">
       <div class="logo">
-        <i class="bi bi-film"></i>
-        Gagan<span>'s Control Panel</span>
+        <i class="bi bi-shield-lock-fill"></i>
+        Gagan<span>'s Admin Dashboard</span>
       </div>
-      <a href="index.html" class="btn-live" target="_blank">
-        <i class="bi bi-box-arrow-up-right"></i> Live Site
-      </a>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <a href="/" class="btn-live" target="_blank">
+          <i class="bi bi-box-arrow-up-right"></i> Live Site
+        </a>
+        <button class="btn-live" onclick="doLogout()" style="border-color:#ff4d4d;color:#ff4d4d;">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      </div>
     </div>
   </header>
 
@@ -672,8 +690,35 @@
   <div class="toast-wrap" id="toastWrap"></div>
 
   <script>
+    // ── LOGOUT ──
+    async function doLogout() {
+      await fetch('/api/logout', { method: 'POST' });
+      window.location.href = '/login';
+    }
+
+    // ── LOAD FROM SERVER API ──
+    async function loadFromServer() {
+      try {
+        const r = await fetch('/api/albums');
+        if (r.ok) return await r.json();
+      } catch(e) {}
+      return null;
+    }
+
+    async function saveToServer(albumData) {
+      try {
+        const r = await fetch('/api/albums', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(albumData)
+        });
+        return r.ok;
+      } catch(e) { return false; }
+    }
+
     // ── DEFAULT ALBUMS (must match index.html exactly) ──
     const defaultAlbums = [
+
       {
         title: "Cultural Celebrations",
         desc: "Relive the vibrant cultural celebrations at college — from the grandeur of Karnataka Rajyotsava to the warmth of Teacher's Day and the colorful energy of Kalasourabha 2024. These moments captured the spirit, pride, and togetherness of our college community.",
@@ -758,17 +803,24 @@
     let albums = [];
 
     // ── INIT ──
-    function init() {
-      const saved = localStorage.getItem('portfolio_albums');
-      if (saved) {
-        try { albums = JSON.parse(saved); } catch(e) { albums = [...defaultAlbums]; }
+    async function init() {
+      // Try server first, then localStorage, then defaults
+      const serverData = await loadFromServer();
+      if (serverData && serverData.length > 0) {
+        albums = serverData;
       } else {
-        albums = JSON.parse(JSON.stringify(defaultAlbums)); // deep clone
+        const saved = localStorage.getItem('portfolio_albums');
+        if (saved) {
+          try { albums = JSON.parse(saved); } catch(e) { albums = [...defaultAlbums]; }
+        } else {
+          albums = JSON.parse(JSON.stringify(defaultAlbums));
+        }
       }
       refreshTable();
       updateStats();
       generateExport();
     }
+
 
     // ── REFRESH TABLE ──
     function refreshTable() {
@@ -777,13 +829,15 @@
         tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><i class="bi bi-inbox"></i><p>No albums yet. Click <strong>Add Album</strong> to get started.</p></div></td></tr>`;
         return;
       }
-      tbody.innerHTML = albums.map((a, i) => `
+      tbody.innerHTML = albums.map((a, i) => {
+        const fc = (a.filterClass || '').replace('filter-', '') || '—';
+        return `
         <tr>
-          <td><img class="cover-thumb" src="${escHtml(a.cover)}" onerror="this.style.opacity='0.3'"></td>
-          <td class="title-cell">${escHtml(a.title)}</td>
-          <td><span class="badge-category">${escHtml(a.category)}</span></td>
+          <td><img class="cover-thumb" src="${escHtml(a.cover || '')}" onerror="this.style.opacity='0.3'"></td>
+          <td class="title-cell">${escHtml(a.title || '')}</td>
+          <td><span class="badge-category">${escHtml(a.category || '')}</span></td>
           <td><span class="photo-count"><i class="bi bi-images"></i> ${(a.images||[]).length}</span></td>
-          <td><span class="photo-count">${escHtml(a.filterClass.replace('filter-',''))}</span></td>
+          <td><span class="photo-count">${escHtml(fc)}</span></td>
           <td>
             <div class="action-btns">
               <button class="btn-icon up-btn" onclick="moveAlbum(${i},-1)" title="Move Up" ${i===0?'disabled style="opacity:0.3"':''}>
@@ -796,8 +850,8 @@
               <button class="btn-icon del" onclick="deleteAlbum(${i})" title="Delete"><i class="bi bi-trash3"></i></button>
             </div>
           </td>
-        </tr>
-      `).join('');
+        </tr>`;
+      }).join('');
     }
 
     // ── STATS ──
@@ -825,19 +879,20 @@
         document.getElementById('f-cover-file').value = '';
       } else {
         const a = albums[idx];
-        document.getElementById('editorTitle').textContent = 'Edit: ' + a.title;
-        document.getElementById('f-title').value = a.title || '';
+        document.getElementById('editorTitle').textContent = 'Edit: ' + (a.title || 'Album');
+        document.getElementById('f-title').value    = a.title    || '';
         document.getElementById('f-category').value = a.category || '';
-        document.getElementById('f-cover').value = a.cover || '';
-        document.getElementById('f-desc').value = a.desc || '';
-        document.getElementById('f-filter').value = a.filterClass || 'filter-academic';
+        document.getElementById('f-cover').value    = a.cover    || '';
+        document.getElementById('f-desc').value     = a.desc     || '';
+        document.getElementById('f-filter').value   = a.filterClass || '';
         renderImageRows(a.images || []);
-        
+
+        const prevImg = document.getElementById('f-cover-preview');
         if (a.cover) {
-          document.getElementById('f-cover-preview').src = a.cover;
-          document.getElementById('f-cover-preview').style.display = 'block';
+          prevImg.src = a.cover;
+          prevImg.style.display = 'block';
         } else {
-          document.getElementById('f-cover-preview').style.display = 'none';
+          prevImg.style.display = 'none';
         }
         document.getElementById('f-cover-file').value = '';
       }
@@ -935,69 +990,74 @@
     }
 
     // ── SAVE ──
-    function saveAlbum() {
-      const title = document.getElementById('f-title').value.trim();
-      const category = document.getElementById('f-category').value.trim();
-      const cover = document.getElementById('f-cover').value.trim();
-      const desc = document.getElementById('f-desc').value.trim();
-      const filterClass = document.getElementById('f-filter').value;
-      const images = getImages();
+    async function saveAlbum() {
+      const title       = document.getElementById('f-title').value.trim();
+      const category    = document.getElementById('f-category').value.trim();
+      const cover       = document.getElementById('f-cover').value.trim();
+      const desc        = document.getElementById('f-desc').value.trim();
+      const filterClass = document.getElementById('f-filter').value.trim();
+      const images      = getImages();
 
       if (!title || !category || !cover || !desc) {
-        showToast('Please fill all required fields.', 'bi-exclamation-circle');
+        showToast('Please fill in: Title, Category, Cover Image, and Description.', 'bi-exclamation-circle');
         return;
       }
 
       const album = { title, desc, category, filterClass, cover, images };
-      const idx = parseInt(document.getElementById('editIndex').value);
+      const idx   = parseInt(document.getElementById('editIndex').value);
 
       if (idx === -1) {
         albums.push(album);
-        showToast('Album added!', 'bi-check-circle-fill');
       } else {
         albums[idx] = album;
-        showToast('Album updated!', 'bi-check-circle-fill');
       }
 
-      persist();
+      const ok = await persist();
+      if (ok) {
+        showToast(idx === -1 ? '✅ Album added!' : '✅ Album updated!', 'bi-check-circle-fill');
+      } else {
+        showToast('⚠️ Saved locally but server error occurred.', 'bi-exclamation-triangle');
+      }
       closeEditor();
     }
 
     // ── DELETE ──
-    function deleteAlbum(idx) {
+    async function deleteAlbum(idx) {
       const name = albums[idx].title;
       if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
       albums.splice(idx, 1);
-      persist();
+      await persist();
       closeEditor();
       showToast('Album deleted.', 'bi-trash3');
     }
 
     // ── REORDER ──
-    function moveAlbum(idx, dir) {
+    async function moveAlbum(idx, dir) {
       const target = idx + dir;
       if (target < 0 || target >= albums.length) return;
       [albums[idx], albums[target]] = [albums[target], albums[idx]];
-      persist();
+      await persist();
     }
 
-    // ── PERSIST ──
+    // ── PERSIST — saves to server data.json ──
     async function persist() {
+      let ok = false;
       try {
         const res = await fetch('/api/albums', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(albums)
         });
-        if (!res.ok) {
-          showToast('Error saving to server.', 'bi-exclamation-triangle');
-        }
+        ok = res.ok;
       } catch (err) {
-        console.error(err);
-        showToast('Network error saving to server.', 'bi-exclamation-triangle');
+        console.error('Persist error:', err);
       }
+      // Also keep localStorage as backup
+      localStorage.setItem('portfolio_albums', JSON.stringify(albums));
       refreshTable();
       updateStats();
+      generateExport();
+      return ok;
     }
 
     // ── LIVE PREVIEW ──

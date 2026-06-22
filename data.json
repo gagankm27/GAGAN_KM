@@ -1,34 +1,21 @@
 [
     {
-        "title": "Cultural Celebrations",
-        "desc": "Relive the vibrant cultural celebrations at college — from the grandeur of Karnataka Rajyotsava to the warmth of Teacher's Day and the colorful energy of Kalasourabha 2024. These moments captured the spirit, pride, and togetherness of our college community.",
-        "category": "Cultural • College",
-        "cover": "assets/img/portfolio/clg.jpg",
-        "images": [
-            "assets/img/portfolio/clg.jpg",
-            "assets/img/portfolio/COLLEGE1.jpg",
-            "assets/img/portfolio/prends.jpg",
-            "assets/img/portfolio/college.jpg"
-        ]
-    },
-    {
-        "title": "Academic Highlights",
-        "desc": "A journey through the academic milestones — from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
         "category": "Academic • Achievement",
         "cover": "assets/img/portfolio/sjbit.jpg",
+        "desc": "A journey through the academic milestones — from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
         "images": [
             "assets/img/portfolio/sjbit.jpg",
             "assets/img/portfolio/mevi.jpg",
             "assets/img/portfolio/project.jpg",
             "assets/img/portfolio/school.jpg",
             "assets/img/portfolio/college.jpg"
-        ]
+        ],
+        "title": "Academic Highlights"
     },
     {
-        "title": "Friends Forever",
-        "desc": "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
         "category": "Friends • Lifetime",
         "cover": "assets/img/portfolio/friends.jpg",
+        "desc": "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
         "images": [
             "assets/img/portfolio/friends.jpg",
             "assets/img/portfolio/frirndsss.jpg",
@@ -36,39 +23,40 @@
             "assets/img/portfolio/prends.jpg",
             "assets/img/portfolio/Group1.jpeg",
             "assets/img/portfolio/Group2.jpeg"
-        ]
+        ],
+        "title": "Friends Forever"
     },
     {
-        "title": "Trophy Moments",
-        "desc": "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments — from volleyball championships to department victories — are proof that teamwork makes the dream work.",
         "category": "Sports • Victory",
         "cover": "assets/img/portfolio/me_trophy.jpg",
+        "desc": "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments — from volleyball championships to department victories — are proof that teamwork makes the dream work.",
         "images": [
             "assets/img/portfolio/me_trophy.jpg",
             "assets/img/portfolio/dept_trophy.jpg",
             "assets/img/portfolio/sports_1.jpg",
             "assets/img/portfolio/winning_moment.jpg"
-        ]
+        ],
+        "title": "Trophy Moments"
     },
     {
-        "title": "Farewell & Graduation",
-        "desc": "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell — where tears met smiles, and memories were sealed forever.",
         "category": "Farewell • 2025",
         "cover": "assets/img/portfolio/Graduation.jpeg",
+        "desc": "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell — where tears met smiles, and memories were sealed forever.",
         "images": [
             "assets/img/portfolio/Graduation.jpeg",
             "assets/img/portfolio/Farewell.jpg"
-        ]
+        ],
+        "title": "Farewell & Graduation"
     },
     {
-        "title": "Best Friends",
-        "desc": "Some bonds go beyond college walls. These are my best friends — the AIML family who stood by me through thick and thin. From purple-themed days to group celebrations, every frame tells a story of love and loyalty.",
         "category": "Friends • AIML",
         "cover": "assets/img/portfolio/purple.jpg",
+        "desc": "Some bonds go beyond college walls. These are my best friends — the AIML family who stood by me through thick and thin. From purple-themed days to group celebrations, every frame tells a story of love and loyalty.",
         "images": [
             "assets/img/portfolio/purple.jpg",
             "assets/img/portfolio/Group1.jpeg",
             "assets/img/portfolio/Group2.jpeg"
-        ]
+        ],
+        "title": "Best Friends"
     }
 ]

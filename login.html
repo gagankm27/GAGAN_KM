@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Gagan KM</title>
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0e14;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,183,39,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,183,39,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPan 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridPan {
+      0%   { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
+    }
+
+    /* Glow orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      opacity: 0.15;
+    }
+    .orb1 { width: 600px; height: 600px; background: #ffb727; top: -200px; left: -200px; animation: orbFloat1 8s ease-in-out infinite alternate; }
+    .orb2 { width: 400px; height: 400px; background: #ff6b35; bottom: -100px; right: -100px; animation: orbFloat2 10s ease-in-out infinite alternate; }
+    @keyframes orbFloat1 { from { transform: translate(0,0); } to { transform: translate(60px, 40px); } }
+    @keyframes orbFloat2 { from { transform: translate(0,0); } to { transform: translate(-40px, -60px); } }
+
+    /* Scan line */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .login-wrap {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,183,39,0.2);
+      border-radius: 20px;
+      padding: 48px 40px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 0 60px rgba(255,183,39,0.08), 0 30px 80px rgba(0,0,0,0.5);
+      animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(30px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)  scale(1); }
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .login-logo .icon-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffb727, #f0a500);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: #0a0e14;
+      margin-bottom: 16px;
+      box-shadow: 0 0 30px rgba(255,183,39,0.4);
+      animation: pulseRing 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseRing {
+      0%, 100% { box-shadow: 0 0 30px rgba(255,183,39,0.4); }
+      50%       { box-shadow: 0 0 50px rgba(255,183,39,0.7); }
+    }
+    .login-logo h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .login-logo p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+
+    .field-group { margin-bottom: 20px; }
+    .field-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+    }
+    .field-wrap {
+      position: relative;
+    }
+    .field-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: rgba(255,255,255,0.25);
+      transition: color 0.2s;
+    }
+    .field-wrap input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px 14px 14px 42px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #fff;
+      outline: none;
+      transition: all 0.25s;
+    }
+    .field-wrap input:focus {
+      border-color: #ffb727;
+      background: rgba(255,183,39,0.06);
+      box-shadow: 0 0 0 3px rgba(255,183,39,0.12);
+    }
+    .field-wrap input:focus + i,
+    .field-wrap:focus-within i { color: #ffb727; }
+    /* Icon before input — re-order so icon is after input in DOM but visually before */
+    .field-wrap { display: flex; align-items: center; }
+    .field-wrap .fi {
+      position: absolute;
+      left: 14px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.25);
+      pointer-events: none;
+      z-index: 1;
+      transition: color 0.2s;
+    }
+    .field-wrap:focus-within .fi { color: #ffb727; }
+
+    .toggle-pw {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: rgba(255,255,255,0.25);
+      font-size: 16px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .toggle-pw:hover { color: #ffb727; }
+
+    .btn-login {
+      width: 100%;
+      background: linear-gradient(135deg, #ffb727, #f0a500);
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #0a0e14;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+    .btn-login:hover {
+      background: linear-gradient(135deg, #ffc750, #ffb727);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,183,39,0.4);
+    }
+    .btn-login:active { transform: translateY(0); }
+    .btn-login.loading { opacity: 0.7; pointer-events: none; }
+
+    .error-msg {
+      display: none;
+      background: rgba(255,77,77,0.1);
+      border: 1px solid rgba(255,77,77,0.3);
+      color: #ff6b6b;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      align-items: center;
+      gap: 8px;
+      animation: shake 0.4s ease;
+    }
+    .error-msg.show { display: flex; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60%  { transform: translateX(-6px); }
+      40%,80%  { transform: translateX(6px); }
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 24px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #ffb727; }
+
+    .security-note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="login-wrap">
+    <div class="login-card">
+
+      <div class="login-logo">
+        <div class="icon-ring"><i class="bi bi-shield-lock-fill"></i></div>
+        <h1>Admin Portal</h1>
+        <p>Gagan KM · Portfolio Control Panel</p>
+      </div>
+
+      <div class="error-msg" id="errorMsg">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span id="errorText">Invalid credentials. Please try again.</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Username</label>
+        <div class="field-wrap">
+          <i class="fi bi-person-fill"></i>
+          <input type="text" id="username" placeholder="Enter username" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Password</label>
+        <div class="field-wrap">
+          <i class="fi bi-lock-fill"></i>
+          <input type="password" id="password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+          <span class="toggle-pw" onclick="togglePw()" id="pwToggle"><i class="bi bi-eye" id="pwIcon"></i></span>
+        </div>
+      </div>
+
+      <button class="btn-login" id="loginBtn" onclick="doLogin()">
+        <i class="bi bi-box-arrow-in-right"></i> Sign In
+      </button>
+
+      <a href="/" class="back-link"><i class="bi bi-arrow-left"></i> Back to Portfolio</a>
+
+      <div class="security-note">
+        <i class="bi bi-shield-check"></i> Secured Admin Area
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePw() {
+      const inp = document.getElementById('password');
+      const icon = document.getElementById('pwIcon');
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        inp.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    }
+
+    async function doLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('errorMsg');
+      const errTxt = document.getElementById('errorText');
+
+      if (!username || !password) {
+        errTxt.textContent = 'Please enter both username and password.';
+        err.classList.add('show');
+        return;
+      }
+
+      btn.classList.add('loading');
+      btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Signing in...';
+      err.classList.remove('show');
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          btn.innerHTML = '<i class="bi bi-check-circle-fill"></i> Access Granted!';
+          btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+          setTimeout(() => { window.location.href = '/admin'; }, 700);
+        } else {
+          errTxt.textContent = data.message || 'Invalid credentials.';
+          err.classList.add('show');
+          btn.classList.remove('loading');
+          btn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Sign In';
+          document.getElementById('password').value = '';
+        }
+      } catch (e) {
+        errTxt.textContent = 'Server error. Is the app running?';
+        err.classList.add('show');
+        btn.classList.remove('loading');
+        btn.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Sign In';
+      }
+    }
+
+    // Auto-focus username
+    document.getElementById('username').focus();
+  </script>
+</body>
+</html>

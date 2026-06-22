@@ -826,14 +826,33 @@ section {
 
 .portfolio .portfolio-item {
   margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
 }
 
 .portfolio .portfolio-item .portfolio-img {
   overflow: hidden;
+  position: relative;
+  background: transparent;
+  line-height: 0;
+}
+
+.portfolio .portfolio-item .portfolio-img::after,
+.portfolio .portfolio-item .portfolio-img::before {
+  display: none !important;
+}
+
+.portfolio .portfolio-item::after,
+.portfolio .portfolio-item::before {
+  display: none !important;
 }
 
 .portfolio .portfolio-item .portfolio-img img {
   transition: all 0.8s ease-in-out;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
 .portfolio .portfolio-item .portfolio-info {

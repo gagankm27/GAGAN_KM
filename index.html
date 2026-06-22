@@ -50,7 +50,8 @@
         .album-poster {
             position: relative;
             width: 100%;
-            height: 170px; /* Landscape rectangle height */
+            height: 170px;
+            /* Landscape rectangle height */
             overflow: hidden;
         }
 
@@ -75,7 +76,7 @@
             left: 0;
             width: 100%;
             padding: 40px 18px 20px;
-            background: linear-gradient(to top, rgba(15,23,26,0.95) 0%, rgba(15,23,26,0.7) 60%, transparent 100%);
+            background: linear-gradient(to top, rgba(15, 23, 26, 0.95) 0%, rgba(15, 23, 26, 0.7) 60%, transparent 100%);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
@@ -137,7 +138,8 @@
             transform: translate(-50%, -50%) scale(0.8);
             opacity: 0;
             font-size: 14px;
-            padding-left: 3px; /* Optical center for play icon */
+            padding-left: 3px;
+            /* Optical center for play icon */
             font-family: 'Inter', sans-serif;
             font-weight: 800;
             color: #0f171a;
@@ -195,18 +197,22 @@
         }
 
         .portfolio .portfolio-item {
-            margin-bottom: 0px; /* Reset margin for swiper */
+            margin-bottom: 0px;
+            /* Reset margin for swiper */
         }
 
         /* ===== NETFLIX STYLE SWIPER ===== */
         .portfolio-swiper {
-            padding: 40px 20px; /* Padding to prevent clipping of scaled cards */
+            padding: 40px 20px;
+            /* Padding to prevent clipping of scaled cards */
             overflow: hidden;
-            margin: -40px -20px; /* Offset padding */
+            margin: -40px -20px;
+            /* Offset padding */
         }
 
         .portfolio-swiper .swiper-slide {
-            width: 300px; /* Wider width for landscape rectangle */
+            width: 300px;
+            /* Wider width for landscape rectangle */
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -219,57 +225,16 @@
         .portfolio-swiper .album-card {
             transition: none;
         }
+
         .portfolio-swiper .album-card:hover {
-            transform: none; /* Handled by swiper-slide */
+            transform: none;
+            /* Handled by swiper-slide */
         }
 
         /* ===== BEAUTIFUL SWIPER NAVIGATION BUTTONS ===== */
-        .portfolio-swiper .swiper-button-next,
-        .portfolio-swiper .swiper-button-prev {
-            width: 48px;
-            height: 48px;
-            background: rgba(15, 23, 26, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-            margin-top: -24px;
-        }
-        
-        .portfolio-swiper .swiper-button-next:after,
-        .portfolio-swiper .swiper-button-prev:after {
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .portfolio-swiper .swiper-button-next:hover,
-        .portfolio-swiper .swiper-button-prev:hover {
-            background: rgba(255, 183, 39, 0.9);
-            color: #0f171a;
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(255, 183, 39, 0.4) !important;
-            border-color: rgba(255, 183, 39, 1);
-        }
-
-        .portfolio-swiper .swiper-button-prev {
-            left: 20px;
-        }
-        
-        .portfolio-swiper .swiper-button-next {
-            right: 20px;
-        }
-
-        .portfolio-swiper .swiper-pagination-bullet {
-            background: #cccccc;
-            opacity: 0.6;
-            transition: all 0.3s ease;
-        }
-        .portfolio-swiper .swiper-pagination-bullet-active {
-            background: #ffb727;
-            transform: scale(1.3);
-            opacity: 1;
+        .portfolio-swiper-1 .swiper-wrapper,
+        .portfolio-swiper-2 .swiper-wrapper {
+            transition-timing-function: linear !important;
         }
 
         /* ===== KILL ALL SHADOWS ON CARDS ===== */
@@ -639,7 +604,7 @@
             overflow: hidden;
         }
 
-        .player-image-wrapper img {
+        .player-image-wrapper img, .player-image-wrapper video {
             max-width: 90%;
             max-height: 85vh;
             object-fit: contain;
@@ -793,7 +758,8 @@
                 <li><a class="nav-link scrollto" href="#resume">Resume</a></li>
                 <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="nav-link nav-admin-btn" href="/login" title="Admin Panel"><i class="bi bi-shield-lock-fill"></i> Admin</a></li>
+                <li><a class="nav-link nav-admin-btn" href="/login" title="Admin Panel"><i
+                            class="bi bi-shield-lock-fill"></i> Admin</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -810,14 +776,18 @@
             letter-spacing: 0.3px !important;
             margin-left: 6px;
             transition: all 0.3s ease !important;
-            box-shadow: 0 0 14px rgba(255,183,39,0.3);
+            box-shadow: 0 0 14px rgba(255, 183, 39, 0.3);
         }
+
         .nav-admin-btn:hover {
             background: linear-gradient(135deg, #ffc750, #ffb727) !important;
             transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255,183,39,0.5) !important;
+            box-shadow: 0 4px 20px rgba(255, 183, 39, 0.5) !important;
         }
-        .nav-admin-btn i { font-size: 13px; }
+
+        .nav-admin-btn i {
+            font-size: 13px;
+        }
     </style>
 
 
@@ -930,6 +900,7 @@
                 display: flex;
                 align-items: center;
             }
+
             .modern-about .container {
                 width: 100%;
             }
@@ -940,6 +911,7 @@
                 height: 460px;
                 margin: 0 auto;
             }
+
             .modern-avatar {
                 width: 100%;
                 height: 100%;
@@ -950,10 +922,12 @@
                 position: relative;
                 z-index: 2;
             }
+
             .modern-avatar-wrapper:hover .modern-avatar {
                 transform: translateY(-8px);
                 box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12);
             }
+
             .modern-avatar-bg {
                 position: absolute;
                 top: 25px;
@@ -966,9 +940,11 @@
                 opacity: 0.15;
                 transition: transform 0.4s ease;
             }
+
             .modern-avatar-wrapper:hover .modern-avatar-bg {
                 transform: translate(8px, 8px);
             }
+
             .modern-info-box {
                 padding-left: 30px;
             }
@@ -981,11 +957,13 @@
                 font-weight: 400;
                 margin-bottom: 40px;
             }
+
             .modern-socials {
                 display: flex;
                 gap: 15px;
                 flex-wrap: wrap;
             }
+
             .m-social-btn {
                 display: flex;
                 align-items: center;
@@ -1002,9 +980,11 @@
                 transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
             }
+
             .m-social-btn i {
                 font-size: 18px;
             }
+
             .m-social-btn:hover {
                 background: #ffb727;
                 color: #ffffff;
@@ -1012,15 +992,18 @@
                 transform: translateY(-4px);
                 box-shadow: 0 10px 25px rgba(255, 183, 39, 0.25);
             }
+
             @media (max-width: 991px) {
                 .modern-about {
                     min-height: auto;
                     padding: 80px 0;
                 }
+
                 .modern-info-box {
                     padding-left: 0;
                     margin-top: 50px;
                 }
+
                 .modern-avatar-wrapper {
                     width: 320px;
                     height: 350px;
@@ -1030,6 +1013,7 @@
                     font-size: 15px;
                 }
             }
+
             @media (max-width: 576px) {
                 .modern-avatar-wrapper {
                     width: 260px;
@@ -1049,10 +1033,11 @@
                     <div class="col-lg-5 d-flex justify-content-center mb-5 mb-lg-0">
                         <div class="modern-avatar-wrapper">
                             <div class="modern-avatar-bg"></div>
-                            <img src="assets/img/me.jpg" class="modern-avatar" alt="Gagan KM" onerror="this.src='assets/img/hero/hero-bg.jpg'">
+                            <img src="assets/img/me.jpg" class="modern-avatar" alt="Gagan KM"
+                                onerror="this.src='assets/img/hero/hero-bg.jpg'">
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-7">
                         <div class="modern-info-box">
                             <div class="section-title text-start" style="padding-bottom: 0;">
@@ -1060,11 +1045,18 @@
                                 <h2>Gagan KM</h2>
                             </div>
                             <p class="modern-bio">
-                                AI enthusiast by profession and explorer by heart. I enjoy building things with technology, solving problems, and constantly learning something new. Outside of work, cricket is my favorite way to unwind, and you'll often find me spending time with friends, whether it's a casual meetup, a long drive, or an unplanned adventure. I love traveling, discovering new places, watching movies, listening to music, and making the most of every moment. For me, life is all about balancing ambition, good company, and unforgettable experiences. ✨🏏🎵✈️🍿
+                                AI enthusiast by profession and explorer by heart. I enjoy building things with
+                                technology, solving problems, and constantly learning something new. Outside of work,
+                                cricket is my favorite way to unwind, and you'll often find me spending time with
+                                friends, whether it's a casual meetup, a long drive, or an unplanned adventure. I love
+                                traveling, discovering new places, watching movies, listening to music, and making the
+                                most of every moment. For me, life is all about balancing ambition, good company, and
+                                unforgettable experiences. ✨🏏🎵✈️🍿
                             </p>
-                            
+
                             <div class="modern-socials">
-                                <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="m-social-btn" target="_blank">
+                                <a href="https://www.linkedin.com/in/gagan-k-m-425167277/" class="m-social-btn"
+                                    target="_blank">
                                     <i class="bi bi-linkedin"></i> <span>LinkedIn</span>
                                 </a>
                                 <a href="https://github.com/gagankm27" class="m-social-btn" target="_blank">
@@ -1096,13 +1088,8 @@
                         <h3 class="resume-title">SUMMARY</h3>
                         <div class="resume-item pb-0">
                             <h4>Gagan KM</h4>
-                            <p><em>AI enthusiast by profession and explorer by heart. I enjoy building things with
-                                    technology, solving problems, and constantly learning something new. Outside of
-                                    work, cricket is my favorite way to unwind, and you'll often find me spending time
-                                    with friends, whether it's a casual meetup, a long drive, or an unplanned adventure.
-                                    I love traveling, discovering new places, watching movies, listening to music, and
-                                    making the most of every moment. For me, life is all about balancing ambition, good
-                                    company, and unforgettable experiences. ✨🏏🎵✈️🍿</em></p>
+                            <p><em>life is all about balancing ambition, good company, and unforgettable experiences.
+                                    ✨🏏🎵✈️🍿</em></p>
                             <p>
                             <ul>
                                 <li><i class="bi bi-linkedin"> </i><b>Linkedin:</b> <a
@@ -1414,13 +1401,15 @@
                     <!-- Filters hidden because Swiper handles it differently, or we just show all Netflix style -->
                 </ul>
 
-                <div class="swiper portfolio-swiper">
-                    <div class="swiper-wrapper" id="album-grid">
+                <div class="swiper portfolio-swiper portfolio-swiper-1 mb-4">
+                    <div class="swiper-wrapper" id="album-grid-1">
                         <!-- Dynamic albums will be rendered here by JavaScript -->
                     </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-prev portfolio-swiper-prev"></div>
-                    <div class="swiper-button-next portfolio-swiper-next"></div>
+                </div>
+                <div class="swiper portfolio-swiper portfolio-swiper-2 mt-4">
+                    <div class="swiper-wrapper" id="album-grid-2">
+                        <!-- Dynamic albums will be rendered here by JavaScript -->
+                    </div>
                 </div>
             </div>
         </section><!-- End My Portfolio Section -->
@@ -1469,6 +1458,7 @@
             </div>
             <div class="player-image-wrapper">
                 <img id="player-image" src="" alt="Photo">
+                <video id="player-video" src="" style="display:none;" playsinline controlsList="nodownload"></video>
                 <div class="player-progress-bar">
                     <div class="player-progress" id="player-progress"></div>
                 </div>
@@ -1756,22 +1746,17 @@
         }
 
         function renderPortfolioGrid() {
-            const grid = document.getElementById('album-grid');
-            
-            // If isotope already exists, destroy it before replacing DOM
-            if (window.portfolioIsotope) {
-                window.portfolioIsotope.destroy();
-                window.portfolioIsotope = null;
-            }
+            const grid1 = document.getElementById('album-grid-1');
+            const grid2 = document.getElementById('album-grid-2');
+            grid1.innerHTML = '';
+            grid2.innerHTML = '';
 
-            grid.innerHTML = '';
-
-            albums.forEach((album, index) => {
+            // Helper to generate slide HTML
+            const generateSlide = (album, index) => {
                 const tags = (album.category || '').split('•').map(t => t.trim()).filter(Boolean);
                 const tagsHtml = tags.map(t => `<span class="genre-tag">${t}</span>`).join('');
                 const filterClass = album.filterClass || 'filter-academic';
-
-                grid.innerHTML += `
+                return `
                     <div class="swiper-slide portfolio-item ${filterClass}" onclick="openAlbum(${index})">
                         <div class="album-card">
                             <div class="album-poster">
@@ -1786,36 +1771,48 @@
                         </div>
                     </div>
                 `;
+            };
+
+            albums.forEach((album, index) => {
+                grid1.innerHTML += generateSlide(album, index);
             });
 
-            // Initialize or Re-initialize Swiper
-            if (window.portfolioSwiper) {
-                window.portfolioSwiper.destroy(true, true);
-            }
-            
-            window.portfolioSwiper = new Swiper('.portfolio-swiper', {
-                speed: 800,
+            const descendingAlbums = albums.map((a, i) => ({ album: a, index: i })).reverse();
+            descendingAlbums.forEach((item) => {
+                grid2.innerHTML += generateSlide(item.album, item.index);
+            });
+
+            if (window.portfolioSwiper1) window.portfolioSwiper1.destroy(true, true);
+            if (window.portfolioSwiper2) window.portfolioSwiper2.destroy(true, true);
+
+            const commonSwiperConfig = {
+                speed: 6000,
                 loop: true,
-                autoplay: {
-                    delay: 2500,
-                    disableOnInteraction: false,
-                },
+                freeMode: true,
                 slidesPerView: 'auto',
                 spaceBetween: 20,
-                centeredSlides: false,
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'bullets',
-                    clickable: true
-                },
-                navigation: {
-                    nextEl: '.portfolio-swiper-next',
-                    prevEl: '.portfolio-swiper-prev',
-                },
+                allowTouchMove: true,
                 breakpoints: {
                     320: { slidesPerView: 1, spaceBetween: 20 },
                     768: { slidesPerView: 'auto', spaceBetween: 20 },
                     1024: { slidesPerView: 'auto', spaceBetween: 30 }
+                }
+            };
+
+            window.portfolioSwiper1 = new Swiper('.portfolio-swiper-1', {
+                ...commonSwiperConfig,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                }
+            });
+
+            window.portfolioSwiper2 = new Swiper('.portfolio-swiper-2', {
+                ...commonSwiperConfig,
+                autoplay: {
+                    delay: 0,
+                    disableOnInteraction: false,
+                    reverseDirection: true
                 }
             });
         }
@@ -1857,7 +1854,11 @@
                     currentPhotoIndex = i;
                     playAlbum();
                 };
-                thumb.innerHTML = `
+                const isVid = img && (img.startsWith('data:video') || img.match(/\.(mp4|webm|ogv|mov)$/i));
+                thumb.innerHTML = isVid ? `
+          <video src="${img}" style="width:100%;height:100%;object-fit:cover;"></video>
+          <span class="thumb-number"><i class="bi bi-play-fill" style="margin-right:2px;"></i>${i + 1}</span>
+        ` : `
           <img src="${img}" alt="Scene ${i + 1}">
           <span class="thumb-number">${i + 1}</span>
         `;
@@ -1895,6 +1896,8 @@
             startAutoPlay();
         }
 
+        let playTimeout = null;
+
         // ===== SHOW PHOTO =====
         function showPhoto(index) {
             const album = albums[currentAlbumIndex];
@@ -1902,16 +1905,37 @@
 
             currentPhotoIndex = index;
             const imgEl = document.getElementById('player-image');
+            const vidEl = document.getElementById('player-video');
+            const src = album.images[index];
+            const isVid = src && (src.startsWith('data:video') || src.match(/\.(mp4|webm|ogv|mov)$/i));
 
-            // Fade animation
-            imgEl.style.animation = 'none';
-            imgEl.offsetHeight; // trigger reflow
-            imgEl.style.animation = 'playerFadeIn 0.6s ease';
+            if (isVid) {
+                imgEl.style.display = 'none';
+                vidEl.style.display = 'block';
+                vidEl.src = src;
+                
+                vidEl.style.animation = 'none';
+                vidEl.offsetHeight; 
+                vidEl.style.animation = 'playerFadeIn 0.6s ease';
+                
+                vidEl.onended = () => {
+                    if (isPlaying) {
+                        nextPhoto();
+                    }
+                };
+            } else {
+                vidEl.style.display = 'none';
+                vidEl.pause();
+                imgEl.style.display = 'block';
+                
+                imgEl.style.animation = 'none';
+                imgEl.offsetHeight; 
+                imgEl.style.animation = 'playerFadeIn 0.6s ease';
+                imgEl.src = src;
+            }
 
-            imgEl.src = album.images[index];
             document.getElementById('player-counter').textContent = `${index + 1} / ${album.images.length}`;
 
-            // Reset progress
             progressValue = 0;
             updateProgress();
         }
@@ -1922,31 +1946,43 @@
             isPlaying = true;
             updatePlayPauseIcon();
 
+            const src = albums[currentAlbumIndex].images[currentPhotoIndex];
+            const isVid = src && (src.startsWith('data:video') || src.match(/\.(mp4|webm|ogv|mov)$/i));
+            
             progressValue = 0;
-            const progressStep = 50; // ms
-            progressInterval = setInterval(() => {
-                progressValue += (progressStep / SLIDE_DURATION) * 100;
-                updateProgress();
-            }, progressStep);
+            const progressStep = 50; 
+            
+            if (isVid) {
+                const vidEl = document.getElementById('player-video');
+                vidEl.play();
+                progressInterval = setInterval(() => {
+                    if(vidEl.duration) {
+                        progressValue = (vidEl.currentTime / vidEl.duration) * 100;
+                        updateProgress();
+                    }
+                }, progressStep);
+            } else {
+                progressInterval = setInterval(() => {
+                    progressValue += (progressStep / SLIDE_DURATION) * 100;
+                    updateProgress();
+                }, progressStep);
 
-            playInterval = setInterval(() => {
-                const album = albums[currentAlbumIndex];
-                currentPhotoIndex++;
-                if (currentPhotoIndex >= album.images.length) {
-                    currentPhotoIndex = 0;
-                }
-                progressValue = 0;
-                showPhoto(currentPhotoIndex);
-            }, SLIDE_DURATION);
+                playTimeout = setTimeout(() => {
+                    nextPhoto();
+                }, SLIDE_DURATION);
+            }
         }
 
         function stopAutoPlay() {
-            clearInterval(playInterval);
+            clearTimeout(playTimeout);
             clearInterval(progressInterval);
-            playInterval = null;
+            playTimeout = null;
             progressInterval = null;
             isPlaying = false;
             updatePlayPauseIcon();
+            
+            const vidEl = document.getElementById('player-video');
+            if (vidEl) vidEl.pause();
         }
 
         function updateProgress() {

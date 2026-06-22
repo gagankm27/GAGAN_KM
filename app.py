@@ -8,6 +8,14 @@ from flask import Flask, send_from_directory, request, jsonify, session, redirec
 app = Flask(__name__, static_folder='assets', static_url_path='/assets')
 app.secret_key = 'gagan_admin_secret_2025_xK9#mP'   # change this if deploying publicly
 
+@app.after_request
+def add_header(response):
+    response.cache_control.no_cache = True
+    response.cache_control.no_store = True
+    response.cache_control.must_revalidate = True
+    response.cache_control.max_age = 0
+    return response
+
 DATA_FILE  = 'data.json'
 IMG_DIR    = os.path.join('assets', 'img', 'portfolio')
 
@@ -30,21 +38,39 @@ def save_data(data):
     with open(DATA_FILE, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
-def process_base64_image(img_str):
-    if not img_str or not img_str.startswith('data:image'):
-        return img_str
+def process_base64_media(media_str, album_title=None):
+    if not media_str or not (media_str.startswith('data:image') or media_str.startswith('data:video')):
+        return media_str
     try:
-        header, encoded = img_str.split(',', 1)
+        header, encoded = media_str.split(',', 1)
         ext = 'jpg'
         if   'image/png'  in header: ext = 'png'
         elif 'image/jpeg' in header: ext = 'jpg'
         elif 'image/gif'  in header: ext = 'gif'
         elif 'image/webp' in header: ext = 'webp'
+        elif 'video/mp4'  in header: ext = 'mp4'
+        elif 'video/webm' in header: ext = 'webm'
+        elif 'video/ogg'  in header: ext = 'ogv'
+        elif 'video/quicktime' in header: ext = 'mov'
+        
         filename = f"{uuid.uuid4().hex[:10]}.{ext}"
-        filepath = os.path.join(IMG_DIR, filename)
-        with open(filepath, 'wb') as f:
-            f.write(base64.b64decode(encoded))
-        return f"assets/img/portfolio/{filename}"
+        
+        if album_title:
+            safe_title = "".join(c for c in album_title if c.isalnum() or c in " _-").strip()
+            if not safe_title:
+                safe_title = "Untitled"
+            target_dir = os.path.join('assets', 'img', 'ALBUM', safe_title)
+            os.makedirs(target_dir, exist_ok=True)
+            filepath = os.path.join(target_dir, filename)
+            with open(filepath, 'wb') as f:
+                f.write(base64.b64decode(encoded))
+            url_path = f"assets/img/ALBUM/{safe_title}/{filename}".replace('\\', '/')
+            return url_path
+        else:
+            filepath = os.path.join(IMG_DIR, filename)
+            with open(filepath, 'wb') as f:
+                f.write(base64.b64decode(encoded))
+            return f"assets/img/portfolio/{filename}"
     except Exception as e:
         print(f"Image error: {e}")
         return img_str
@@ -107,10 +133,11 @@ def get_albums():
 def update_albums():
     albums = request.json or []
     for album in albums:
-        if 'cover' in album and album['cover'].startswith('data:image'):
-            album['cover'] = process_base64_image(album['cover'])
+        title = album.get('title', 'Unknown_Album')
+        if 'cover' in album and (album['cover'].startswith('data:image') or album['cover'].startswith('data:video')):
+            album['cover'] = process_base64_media(album['cover'], album_title=title)
         if 'images' in album:
-            album['images'] = [process_base64_image(img) for img in album['images']]
+            album['images'] = [process_base64_media(img, album_title=title) for img in album['images']]
     save_data(albums)
     return jsonify({'status': 'success', 'message': 'Albums saved successfully'})
 

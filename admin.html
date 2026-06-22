@@ -9,6 +9,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
 
   <style>
     :root {
@@ -23,6 +24,36 @@
       --border: #e0e0e0;
       --card-bg: #ffffff;
       --input-bg: #ffffff;
+    }
+
+    /* ── CROP MODAL ── */
+    .crop-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+    .crop-modal-content {
+      background: var(--card-bg);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .crop-img-container {
+      width: 100%;
+      max-height: 60vh;
+      margin-bottom: 20px;
+      background: #243038;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .crop-img-container img {
+      max-width: 100%;
     }
 
     * { box-sizing: border-box; }
@@ -654,10 +685,16 @@
           <div class="form-group">
             <label class="form-label-dark">Photos in Album</label>
             <div class="images-list" id="imagesList"></div>
-            <button class="add-image-btn" onclick="addImageRow('')">
-              <i class="bi bi-plus-circle"></i> Add Image
-            </button>
-            <div class="form-hint">Each row is one photo. Drag order = slideshow order.</div>
+            <div style="display: flex; gap: 10px;">
+              <input type="file" id="multi-photo-upload" multiple accept="image/*,video/*" style="display:none;" onchange="handleMultiUpload(event)">
+              <button type="button" class="add-image-btn" style="flex: 1;" onclick="document.getElementById('multi-photo-upload').click()">
+                <i class="bi bi-images"></i> Add Photos & Videos
+              </button>
+              <button type="button" class="add-image-btn" onclick="addImageRow('')">
+                <i class="bi bi-plus-circle"></i> Add Empty Row
+              </button>
+            </div>
+            <div class="form-hint">Upload multiple photos at once. Each row is one photo. Drag order = slideshow order.</div>
           </div>
 
           <div class="save-row">
@@ -689,6 +726,24 @@
   <!-- Toast container -->
   <div class="toast-wrap" id="toastWrap"></div>
 
+  <!-- Crop Modal -->
+  <div class="crop-modal" id="cropModal">
+    <div class="crop-modal-content">
+      <h5 style="margin-top:0; color:var(--text-primary); font-weight:700; margin-bottom:15px;"><i class="bi bi-crop"></i> Crop Cover Image</h5>
+      <div class="crop-img-container">
+        <img id="imageToCrop" src="">
+      </div>
+      <div style="display:flex; gap:10px; justify-content:space-between; align-items: center;">
+        <div style="font-size: 12px; color: var(--text-secondary);">Use mouse wheel to zoom, drag to pan.</div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-cancel" onclick="closeCropModal()">Cancel</button>
+          <button class="btn-save" onclick="applyCrop()">Apply Crop</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <script>
     // ── LOGOUT ──
     async function doLogout() {
@@ -922,10 +977,14 @@
       const list = document.getElementById('imagesList');
       const row = document.createElement('div');
       row.className = 'image-row';
+      const isVideo = src && (src.startsWith('data:video') || src.match(/\.(mp4|webm|ogv|mov)$/i));
+      const mediaHtml = isVideo 
+        ? `<video src="${escHtml(src)}" muted style="width:48px;height:48px;object-fit:cover;border-radius:4px;"></video>`
+        : `<img src="${escHtml(src)}" onerror="this.style.opacity='0.3'">`;
       row.innerHTML = `
-        <img src="${escHtml(src)}" onerror="this.style.opacity='0.3'">
+        ${mediaHtml}
         <input type="hidden" value="${escHtml(src)}" class="photo-data">
-        <input type="file" class="form-ctrl" accept="image/*" onchange="handleRowUpload(this)">
+        <input type="file" class="form-ctrl" accept="image/*,video/*" onchange="handleRowUpload(this)">
         <div class="img-actions">
           <button class="btn-icon up-btn" onclick="moveRow(this,-1)" title="Up"><i class="bi bi-arrow-up"></i></button>
           <button class="btn-icon dn-btn" onclick="moveRow(this,1)" title="Down"><i class="bi bi-arrow-down"></i></button>
@@ -936,35 +995,112 @@
       updatePreview();
     }
 
+    let cropper = null;
+
     function handleCoverUpload(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          document.getElementById('f-cover').value = e.target.result;
-          const preview = document.getElementById('f-cover-preview');
-          preview.src = e.target.result;
-          preview.style.display = 'block';
+          openCropModal(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+      event.target.value = ''; // Reset input so same file can be chosen again
+    }
+
+    function openCropModal(imgSrc) {
+      const modal = document.getElementById('cropModal');
+      const img = document.getElementById('imageToCrop');
+      img.src = imgSrc;
+      modal.style.display = 'flex';
+      
+      if (cropper) cropper.destroy();
+      cropper = new Cropper(img, {
+        aspectRatio: 3 / 2, // Lock to card aspect ratio
+        viewMode: 2,
+        autoCropArea: 1,
+        background: false
+      });
+    }
+
+    function closeCropModal() {
+      document.getElementById('cropModal').style.display = 'none';
+      if (cropper) {
+        cropper.destroy();
+        cropper = null;
+      }
+    }
+
+    function applyCrop() {
+      if (!cropper) return;
+      const canvas = cropper.getCroppedCanvas({
+        width: 600,
+        height: 400
+      });
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      
+      document.getElementById('f-cover').value = dataUrl;
+      const preview = document.getElementById('f-cover-preview');
+      preview.src = dataUrl;
+      preview.style.display = 'block';
+      updatePreview();
+      
+      closeCropModal();
+    }
+
+    function handleRowUpload(input) {
+      const file = input.files[0];
+      if (file) {
+        if (file.size > 50 * 1024 * 1024) {
+          alert("File is too large! Maximum allowed size is 50MB.");
+          input.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const row = input.closest('.image-row');
+          row.querySelector('.photo-data').value = e.target.result;
+          
+          const isVideo = file.type.startsWith('video/');
+          const oldMedia = row.querySelector('img, video');
+          const newMedia = document.createElement(isVideo ? 'video' : 'img');
+          newMedia.src = e.target.result;
+          if (isVideo) {
+            newMedia.muted = true;
+            newMedia.style.width = '48px';
+            newMedia.style.height = '48px';
+            newMedia.style.objectFit = 'cover';
+            newMedia.style.borderRadius = '4px';
+          }
+          oldMedia.replaceWith(newMedia);
           updatePreview();
         };
         reader.readAsDataURL(file);
       }
     }
 
-    function handleRowUpload(input) {
-      const file = input.files[0];
-      if (file) {
+    function handleMultiUpload(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+      
+      let oversized = false;
+      Array.from(files).forEach(file => {
+        if (file.size > 50 * 1024 * 1024) {
+          oversized = true;
+          return;
+        }
         const reader = new FileReader();
         reader.onload = function(e) {
-          const row = input.closest('.image-row');
-          row.querySelector('.photo-data').value = e.target.result;
-          const img = row.querySelector('img');
-          img.src = e.target.result;
-          img.style.opacity = '1';
-          updatePreview();
+          addImageRow(e.target.result);
         };
         reader.readAsDataURL(file);
+      });
+      if (oversized) {
+         alert("One or more files were ignored because they exceed the 50MB size limit.");
       }
+      
+      event.target.value = ''; // Reset input
     }
 
     function removeRow(btn) {
@@ -1014,7 +1150,10 @@
 
       const ok = await persist();
       if (ok) {
-        showToast(idx === -1 ? '✅ Album added!' : '✅ Album updated!', 'bi-check-circle-fill');
+        showToast(idx === -1 ? '✅ Album uploaded successfully!' : '✅ Album updated successfully!', 'bi-check-circle-fill');
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       } else {
         showToast('⚠️ Saved locally but server error occurred.', 'bi-exclamation-triangle');
       }

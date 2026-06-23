@@ -144,12 +144,93 @@ ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp', '.gif'}
 @app.route('/api/hero-images', methods=['GET'])
 def get_hero_images():
     os.makedirs(HERO_DIR, exist_ok=True)
+    order_file = 'hero_order.json'
+    if os.path.exists(order_file):
+        with open(order_file, 'r') as f:
+            try:
+                return jsonify(json.load(f))
+            except:
+                pass
+
     images = []
     for f in sorted(os.listdir(HERO_DIR)):
         ext = os.path.splitext(f)[1].lower()
         if ext in ALLOWED_EXTENSIONS:
             images.append(f'assets/img/Hero/{f}')
     return jsonify(images)
+
+@app.route('/api/hero-images', methods=['POST'])
+@login_required
+def update_hero_images():
+    images = request.json or []
+    os.makedirs(HERO_DIR, exist_ok=True)
+    
+    processed_images = []
+    for img in images:
+        if img.startswith('data:image'):
+            import base64
+            import hashlib
+            
+            header, encoded = img.split(",", 1)
+            ext = 'jpg'
+            if 'image/png' in header: ext = 'png'
+            elif 'image/webp' in header: ext = 'webp'
+            elif 'image/gif' in header: ext = 'gif'
+            
+            data_bytes = base64.b64decode(encoded)
+            file_hash = hashlib.md5(data_bytes).hexdigest()[:10]
+            filename = f"hero_{file_hash}.{ext}"
+            filepath = os.path.join(HERO_DIR, filename)
+            
+            with open(filepath, "wb") as f:
+                f.write(data_bytes)
+            processed_images.append(f'assets/img/Hero/{filename}')
+        else:
+            processed_images.append(img)
+            
+    # Delete removed images
+    current_files = set(f'assets/img/Hero/{f}' for f in os.listdir(HERO_DIR) if os.path.splitext(f)[1].lower() in ALLOWED_EXTENSIONS)
+    new_files = set(processed_images)
+    
+    for old_f in current_files:
+        if old_f not in new_files:
+            try:
+                os.remove(old_f)
+            except:
+                pass
+                
+    with open('hero_order.json', 'w') as f:
+        json.dump(processed_images, f)
+        
+    return jsonify({'status': 'success'})
+
+# ── Testimonials API ──────────────────────────────────────────────────────
+TESTIMONIALS_FILE = 'testimonials.json'
+
+def load_testimonials():
+    if not os.path.exists(TESTIMONIALS_FILE):
+        return []
+    with open(TESTIMONIALS_FILE, 'r', encoding='utf-8') as f:
+        try:    return json.load(f)
+        except: return []
+
+def save_testimonials(data):
+    with open(TESTIMONIALS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4)
+
+@app.route('/api/testimonials', methods=['GET'])
+def get_testimonials():
+    return jsonify(load_testimonials())
+
+@app.route('/api/testimonials', methods=['POST'])
+@login_required
+def update_testimonials():
+    testimonials = request.json or []
+    for t in testimonials:
+        if 'image' in t and (t['image'].startswith('data:image') or t['image'].startswith('data:video')):
+            t['image'] = process_base64_media(t['image'], album_title="Testimonials")
+    save_testimonials(testimonials)
+    return jsonify({'status': 'success'})
 
 @app.route('/api/albums', methods=['POST'])
 @login_required
@@ -191,11 +272,44 @@ def sync_index():
     new_block = ''.join(lines)
     
     # Regex to match the full albums array (from "let albums = [" to "];")
-    pattern = re.compile(
+    pattern_albums = re.compile(
         r'(// ===== ALBUM DATA =====\s*\n\s*)let albums = \[.*?\];',
         re.DOTALL
     )
-    replacement = r'\g<1>' + new_block
+    
+    # 2. Hero Slides
+    try:
+        hero_images_response = get_hero_images()
+        hero_list = hero_images_response.json
+    except:
+        hero_list = []
+        
+    hero_html = "\n"
+    for idx, img in enumerate(hero_list):
+        active_class = " active" if idx == 0 else ""
+        hero_html += f"        <div class=\"hero-slide{active_class}\" style=\"background-image: url('{img}');\"></div>\n"
+        
+    pattern_hero = re.compile(r'<!-- ===== HERO SLIDES START ===== -->.*?<!-- ===== HERO SLIDES END ===== -->', re.DOTALL)
+    replacement_hero = f'<!-- ===== HERO SLIDES START ===== -->{hero_html}        <!-- ===== HERO SLIDES END ===== -->'
+
+    # 3. Testimonials
+    testimonials = load_testimonials()
+    test_html = "\n"
+    for t in testimonials:
+        test_html += f'''                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{t.get('image','')}" class="testimonial-img" alt="">
+                                <h3>{t.get('name','')}</h3>
+                                <h4>{t.get('title','')}</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    {t.get('quote','')}
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>\n\n'''
+                        
+    pattern_test = re.compile(r'<!-- ===== TESTIMONIALS START ===== -->.*?<!-- ===== TESTIMONIALS END ===== -->', re.DOTALL)
     
     updated = []
     errors = []
@@ -203,9 +317,13 @@ def sync_index():
         try:
             with open(fname, 'r', encoding='utf-8') as f:
                 content = f.read()
-            new_content, count = pattern.subn(replacement, content)
-            if count == 0:
-                errors.append(f'{fname}: pattern not found')
+            
+            new_content, c1 = pattern_albums.subn(lambda m: m.group(1) + new_block, content)
+            new_content, c2 = pattern_hero.subn(lambda m: f'<!-- ===== HERO SLIDES START ===== -->{hero_html}        <!-- ===== HERO SLIDES END ===== -->', new_content)
+            new_content, c3 = pattern_test.subn(lambda m: f'<!-- ===== TESTIMONIALS START ===== -->{test_html}                        <!-- ===== TESTIMONIALS END ===== -->', new_content)
+            
+            if c1 == 0 and c2 == 0 and c3 == 0:
+                errors.append(f'{fname}: patterns not found')
             else:
                 with open(fname, 'w', encoding='utf-8') as f:
                     f.write(new_content)

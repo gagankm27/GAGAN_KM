@@ -8,7 +8,9 @@
 
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Satisfy"
+    rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
 
   <style>
@@ -30,20 +32,25 @@
     .crop-modal {
       display: none;
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
       z-index: 10000;
       align-items: center;
       justify-content: center;
     }
+
     .crop-modal-content {
       background: var(--card-bg);
       border-radius: 12px;
       width: 90%;
       max-width: 600px;
       padding: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
+
     .crop-img-container {
       width: 100%;
       max-height: 60vh;
@@ -52,11 +59,14 @@
       border-radius: 8px;
       overflow: hidden;
     }
+
     .crop-img-container img {
       max-width: 100%;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       background: var(--dark);
@@ -75,12 +85,14 @@
       z-index: 999;
       backdrop-filter: blur(12px);
     }
+
     .admin-header .inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 14px 32px;
     }
+
     .admin-header .logo {
       display: flex;
       align-items: center;
@@ -90,8 +102,15 @@
       color: var(--amber);
       letter-spacing: -0.5px;
     }
-    .admin-header .logo i { font-size: 22px; }
-    .admin-header .logo span { color: var(--text-primary); }
+
+    .admin-header .logo i {
+      font-size: 22px;
+    }
+
+    .admin-header .logo span {
+      color: var(--text-primary);
+    }
+
     .btn-live {
       background: transparent;
       border: 1px solid var(--amber);
@@ -108,6 +127,7 @@
       gap: 7px;
       transition: all 0.25s ease;
     }
+
     .btn-live:hover {
       background: var(--amber);
       color: var(--dark);
@@ -128,14 +148,16 @@
       align-items: center;
       gap: 7px;
       transition: all 0.25s ease;
-      box-shadow: 0 0 14px rgba(255,183,39,0.35);
+      box-shadow: 0 0 14px rgba(255, 183, 39, 0.35);
       letter-spacing: 0.2px;
     }
+
     .btn-sync-index:hover {
       background: linear-gradient(135deg, #ffc750, #ffb727);
       transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(255,183,39,0.5);
+      box-shadow: 0 4px 20px rgba(255, 183, 39, 0.5);
     }
+
     .btn-sync-index:disabled {
       opacity: 0.6;
       cursor: not-allowed;
@@ -150,6 +172,7 @@
       background: var(--dark2);
       border-bottom: 1px solid var(--border);
     }
+
     .stat-chip {
       display: flex;
       align-items: center;
@@ -162,10 +185,59 @@
       font-weight: 600;
       color: var(--text-secondary);
     }
+
     .stat-chip .num {
       font-size: 20px;
       font-weight: 800;
       color: var(--amber);
+    }
+
+    /* ── TABS ── */
+    .admin-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .admin-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 16px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .admin-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .admin-tab.active {
+      color: var(--amber);
+    }
+
+    .admin-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -11px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--amber);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
     }
 
     /* ── LAYOUT ── */
@@ -175,11 +247,13 @@
       gap: 0;
       height: calc(100vh - 113px);
     }
+
     .main-panel {
       overflow-y: auto;
       padding: 28px 32px;
       border-right: 1px solid var(--border);
     }
+
     .side-panel {
       overflow-y: auto;
       padding: 24px;
@@ -194,14 +268,16 @@
       overflow: hidden;
       margin-bottom: 24px;
     }
+
     .panel-card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 16px 20px;
       border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
     }
+
     .panel-card-title {
       font-size: 15px;
       font-weight: 700;
@@ -210,14 +286,21 @@
       align-items: center;
       gap: 8px;
     }
-    .panel-card-title i { color: var(--amber); }
-    .panel-card-body { padding: 20px; }
+
+    .panel-card-title i {
+      color: var(--amber);
+    }
+
+    .panel-card-body {
+      padding: 20px;
+    }
 
     /* ── TABLE ── */
     .album-table {
       width: 100%;
       border-collapse: collapse;
     }
+
     .album-table th {
       text-align: left;
       font-size: 11px;
@@ -228,15 +311,26 @@
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
     }
+
     .album-table td {
       padding: 12px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
       font-size: 13px;
       vertical-align: middle;
     }
-    .album-table tr:last-child td { border-bottom: none; }
-    .album-table tr { transition: background 0.15s; }
-    .album-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .album-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .album-table tr {
+      transition: background 0.15s;
+    }
+
+    .album-table tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
     .album-table .cover-thumb {
       width: 48px;
       height: 48px;
@@ -244,27 +338,35 @@
       border-radius: 7px;
       border: 1px solid var(--border);
     }
+
     .album-table .title-cell {
       font-weight: 700;
       color: var(--text-primary);
       max-width: 180px;
     }
+
     .badge-category {
       background: var(--amber-glow);
       color: var(--amber);
-      border: 1px solid rgba(255,183,39,0.25);
+      border: 1px solid rgba(255, 183, 39, 0.25);
       padding: 3px 10px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 600;
       white-space: nowrap;
     }
+
     .photo-count {
       color: var(--text-secondary);
       font-size: 12px;
       font-weight: 600;
     }
-    .action-btns { display: flex; gap: 6px; }
+
+    .action-btns {
+      display: flex;
+      gap: 6px;
+    }
+
     .btn-icon {
       border: 1px solid var(--border);
       background: transparent;
@@ -279,17 +381,43 @@
       font-size: 13px;
       transition: all 0.2s;
     }
-    .btn-icon:hover { background: var(--dark3); color: var(--text-primary); }
-    .btn-icon.edit:hover { border-color: var(--amber); color: var(--amber); }
-    .btn-icon.del:hover { border-color: #ff4d4d; color: #ff4d4d; }
-    .btn-icon.up-btn:hover, .btn-icon.dn-btn:hover { border-color: #4db8ff; color: #4db8ff; }
+
+    .btn-icon:hover {
+      background: var(--dark3);
+      color: var(--text-primary);
+    }
+
+    .btn-icon.edit:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .btn-icon.del:hover {
+      border-color: #ff4d4d;
+      color: #ff4d4d;
+    }
+
+    .btn-icon.up-btn:hover,
+    .btn-icon.dn-btn:hover {
+      border-color: #4db8ff;
+      color: #4db8ff;
+    }
+
     .empty-state {
       text-align: center;
       padding: 48px 20px;
       color: var(--text-secondary);
     }
-    .empty-state i { font-size: 3rem; opacity: 0.4; }
-    .empty-state p { margin-top: 12px; font-size: 14px; }
+
+    .empty-state i {
+      font-size: 3rem;
+      opacity: 0.4;
+    }
+
+    .empty-state p {
+      margin-top: 12px;
+      font-size: 14px;
+    }
 
     /* ── FORM ── */
     .form-label-dark {
@@ -301,6 +429,7 @@
       margin-bottom: 6px;
       display: block;
     }
+
     .form-ctrl {
       width: 100%;
       background: var(--input-bg);
@@ -313,16 +442,48 @@
       transition: border-color 0.2s;
       outline: none;
     }
-    .form-ctrl:focus { border-color: var(--amber); }
-    .form-ctrl::placeholder { color: rgba(255,255,255,0.25); }
-    select.form-ctrl option { background: var(--dark3); color: var(--text-primary); }
-    textarea.form-ctrl { resize: vertical; }
-    .form-group { margin-bottom: 18px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-hint { font-size: 11px; color: var(--text-secondary); margin-top: 5px; }
+
+    .form-ctrl:focus {
+      border-color: var(--amber);
+    }
+
+    .form-ctrl::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    select.form-ctrl option {
+      background: var(--dark3);
+      color: var(--text-primary);
+    }
+
+    textarea.form-ctrl {
+      resize: vertical;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-hint {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
 
     /* images list */
-    .images-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .images-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
     .image-row {
       display: flex;
       align-items: center;
@@ -332,6 +493,7 @@
       border-radius: 8px;
       padding: 6px 10px;
     }
+
     .image-row img {
       width: 36px;
       height: 36px;
@@ -340,6 +502,7 @@
       background: #2a3640;
       flex-shrink: 0;
     }
+
     .image-row input {
       flex: 1;
       background: transparent;
@@ -350,13 +513,19 @@
       outline: none;
       min-width: 0;
     }
-    .image-row .img-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+    .image-row .img-actions {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
     .add-image-btn {
       display: flex;
       align-items: center;
       gap: 8px;
       background: transparent;
-      border: 1px dashed rgba(255,183,39,0.35);
+      border: 1px dashed rgba(255, 183, 39, 0.35);
       color: var(--amber);
       border-radius: 8px;
       padding: 8px 14px;
@@ -368,10 +537,19 @@
       transition: all 0.2s;
       margin-top: 6px;
     }
-    .add-image-btn:hover { background: var(--amber-glow); border-style: solid; }
+
+    .add-image-btn:hover {
+      background: var(--amber-glow);
+      border-style: solid;
+    }
 
     /* ── SAVE BTNS ── */
-    .save-row { display: flex; gap: 10px; margin-top: 24px; }
+    .save-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
     .btn-save {
       flex: 1;
       background: var(--amber);
@@ -390,7 +568,12 @@
       transition: all 0.2s;
       letter-spacing: 0.3px;
     }
-    .btn-save:hover { background: var(--amber-dark); transform: translateY(-1px); }
+
+    .btn-save:hover {
+      background: var(--amber-dark);
+      transform: translateY(-1px);
+    }
+
     .btn-cancel {
       background: transparent;
       color: var(--text-secondary);
@@ -403,7 +586,12 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-cancel:hover { background: var(--dark3); color: var(--text-primary); }
+
+    .btn-cancel:hover {
+      background: var(--dark3);
+      color: var(--text-primary);
+    }
+
     .btn-add-album {
       background: var(--amber);
       color: var(--dark);
@@ -419,7 +607,10 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .btn-add-album:hover { background: var(--amber-dark); }
+
+    .btn-add-album:hover {
+      background: var(--amber-dark);
+    }
 
     /* ── PREVIEW CARD (right panel) ── */
     .preview-label {
@@ -430,28 +621,37 @@
       color: var(--text-secondary);
       margin-bottom: 14px;
     }
-    .preview-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+    .preview-wrap {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
     .album-card-preview {
       position: relative;
       background: #fff;
       cursor: default;
     }
+
     .album-poster-p {
       position: relative;
       width: 100%;
       height: 200px;
       overflow: hidden;
     }
+
     .album-poster-p img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .album-badge-p {
       position: absolute;
       top: 10px;
       right: 10px;
-      background: rgba(255,183,39,0.9);
+      background: rgba(255, 183, 39, 0.9);
       color: #0f171a;
       padding: 3px 10px;
       border-radius: 20px;
@@ -460,19 +660,28 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     .album-info-p {
       padding: 14px 16px 18px;
       background: #fff;
     }
+
     .album-title-p {
       font-size: 15px;
       font-weight: 700;
       color: #3b434a;
       margin-bottom: 7px;
     }
-    .album-genre-p { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+
+    .album-genre-p {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 7px;
+    }
+
     .genre-tag-p {
-      background: rgba(255,183,39,0.15);
+      background: rgba(255, 183, 39, 0.15);
       color: #c48a00;
       padding: 2px 9px;
       border-radius: 12px;
@@ -481,6 +690,7 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     .album-desc-p {
       color: #6c757d;
       font-size: 12px;
@@ -506,6 +716,7 @@
       white-space: pre-wrap;
       word-break: break-all;
     }
+
     .btn-copy {
       background: transparent;
       border: 1px solid var(--border);
@@ -520,7 +731,12 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .btn-copy:hover { border-color: var(--amber); color: var(--amber); }
+
+    .btn-copy:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
     .btn-reset {
       background: transparent;
       border: 1px solid #ff4d4d;
@@ -532,7 +748,10 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn-reset:hover { background: rgba(255,77,77,0.1); }
+
+    .btn-reset:hover {
+      background: rgba(255, 77, 77, 0.1);
+    }
 
     /* ── TOAST ── */
     .toast-wrap {
@@ -544,6 +763,7 @@
       flex-direction: column;
       gap: 10px;
     }
+
     .toast-msg {
       background: var(--dark3);
       border: 1px solid var(--amber);
@@ -556,26 +776,66 @@
       align-items: center;
       gap: 10px;
       animation: toastIn 0.3s ease;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
-    .toast-msg i { color: var(--amber); font-size: 16px; }
+
+    .toast-msg i {
+      color: var(--amber);
+      font-size: 16px;
+    }
+
     @keyframes toastIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
 
     /* ── RESPONSIVE ── */
     @media(max-width: 900px) {
-      .admin-body { grid-template-columns: 1fr; height: auto; }
-      .side-panel { border-top: 1px solid var(--border); }
-      .form-row { grid-template-columns: 1fr; }
-      .stats-bar { flex-wrap: wrap; }
-      .main-panel, .admin-header .inner, .stats-bar { padding-left: 16px; padding-right: 16px; }
+      .admin-body {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .side-panel {
+        border-top: 1px solid var(--border);
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-bar {
+        flex-wrap: wrap;
+      }
+
+      .main-panel,
+      .admin-header .inner,
+      .stats-bar {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
     }
   </style>
 
@@ -586,7 +846,7 @@
         const r = await fetch('/api/auth-check');
         const d = await r.json();
         if (!d.logged_in) window.location.href = '/login';
-      } catch(e) {
+      } catch (e) {
         window.location.href = '/login';
       }
     })();
@@ -603,7 +863,8 @@
         Gagan<span>'s Admin Dashboard</span>
       </div>
       <div style="display:flex;gap:10px;align-items:center;">
-        <button class="btn-sync-index" onclick="syncToIndex()" title="Push current albums to index.html &amp; main.html">
+        <button class="btn-sync-index" onclick="syncToIndex()"
+          title="Push current albums to index.html &amp; main.html">
           <i class="bi bi-cloud-upload-fill"></i> Export to Index
         </button>
         <a href="/" class="btn-live" target="_blank">
@@ -638,107 +899,215 @@
     <!-- LEFT: Main Panel -->
     <div class="main-panel">
 
-      <!-- Album List -->
-      <div class="panel-card">
-        <div class="panel-card-header">
-          <div class="panel-card-title">
-            <i class="bi bi-collection"></i> All Albums
-          </div>
-          <button class="btn-add-album" onclick="openEditor(-1)">
-            <i class="bi bi-plus-lg"></i> Add Album
-          </button>
-        </div>
-        <div style="overflow-x: auto;">
-          <table class="album-table">
-            <thead>
-              <tr>
-                <th>Cover</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Photos</th>
-                <th>Filter</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="albumTbody">
-              <!-- JS-populated -->
-            </tbody>
-          </table>
-        </div>
+      <!-- TABS HEADER -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('albums')"><i class="bi bi-images"></i> Albums</button>
+        <button class="admin-tab" onclick="switchTab('hero')"><i class="bi bi-aspect-ratio"></i> Hero Images</button>
+        <button class="admin-tab" onclick="switchTab('testimonials')"><i class="bi bi-chat-quote"></i>
+          Testimonials</button>
       </div>
 
-      <!-- Editor Form -->
-      <div class="panel-card" id="editorCard" style="display:none;">
-        <div class="panel-card-header" style="border-left: 3px solid var(--amber);">
-          <div class="panel-card-title">
-            <i class="bi bi-pencil-square"></i>
-            <span id="editorTitle">Add New Album</span>
-          </div>
-          <button class="btn-icon" onclick="closeEditor()" title="Close editor">
-            <i class="bi bi-x-lg"></i>
-          </button>
-        </div>
-        <div class="panel-card-body">
-          <input type="hidden" id="editIndex" value="-1">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label-dark">Album Title *</label>
-              <input type="text" class="form-ctrl" id="f-title" placeholder="e.g. Cultural Celebrations" oninput="updatePreview()">
+      <!-- ==================== ALBUMS TAB ==================== -->
+      <div id="tab-albums" class="tab-content active">
+        <!-- Album List -->
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <div class="panel-card-title">
+              <i class="bi bi-collection"></i> All Albums
             </div>
-            <div class="form-group">
-              <label class="form-label-dark">Filter Class *</label>
-              <input type="text" class="form-ctrl" id="f-filter" placeholder="e.g. filter-academic" oninput="updatePreview()">
-              <div class="form-hint">Must start with 'filter-' to work with portfolio tabs</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label-dark">Category Tags *</label>
-            <input type="text" class="form-ctrl" id="f-category" placeholder="Cultural • College" oninput="updatePreview()">
-            <div class="form-hint">Use '•' to separate multiple tags (e.g. Friends • AIML)</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label-dark">Cover Image *</label>
-            <div style="display:flex; gap:10px; align-items:center;">
-              <img id="f-cover-preview" src="" style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px; display: none;">
-              <input type="hidden" id="f-cover">
-              <input type="file" class="form-ctrl" id="f-cover-file" accept="image/*" onchange="handleCoverUpload(event)">
-            </div>
-            <div class="form-hint">Upload a cover image</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label-dark">Description *</label>
-            <textarea class="form-ctrl" id="f-desc" rows="3" placeholder="Describe this album..." oninput="updatePreview()"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label-dark">Photos in Album</label>
-            <div class="images-list" id="imagesList"></div>
-            <div style="display: flex; gap: 10px;">
-              <input type="file" id="multi-photo-upload" multiple accept="image/*,video/*" style="display:none;" onchange="handleMultiUpload(event)">
-              <button type="button" class="add-image-btn" style="flex: 1;" onclick="document.getElementById('multi-photo-upload').click()">
-                <i class="bi bi-images"></i> Add Photos & Videos
-              </button>
-              <button type="button" class="add-image-btn" onclick="addImageRow('')">
-                <i class="bi bi-plus-circle"></i> Add Empty Row
-              </button>
-            </div>
-            <div class="form-hint">Upload multiple photos at once. Each row is one photo. Drag order = slideshow order.</div>
-          </div>
-
-          <div class="save-row">
-            <button class="btn-save" onclick="saveAlbum()">
-              <i class="bi bi-check2-circle"></i> Save Album
+            <button class="btn-add-album" onclick="openEditor(-1)">
+              <i class="bi bi-plus-lg"></i> Add Album
             </button>
-            <button class="btn-cancel" onclick="closeEditor()">Cancel</button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="album-table">
+              <thead>
+                <tr>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Photos</th>
+                  <th>Filter</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="albumTbody">
+                <!-- JS-populated -->
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
 
+        <!-- Editor Form -->
+        <div class="panel-card" id="editorCard" style="display:none;">
+          <div class="panel-card-header" style="border-left: 3px solid var(--amber);">
+            <div class="panel-card-title">
+              <i class="bi bi-pencil-square"></i>
+              <span id="editorTitle">Add New Album</span>
+            </div>
+            <button class="btn-icon" onclick="closeEditor()" title="Close editor">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="panel-card-body">
+            <input type="hidden" id="editIndex" value="-1">
 
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label-dark">Album Title *</label>
+                <input type="text" class="form-ctrl" id="f-title" placeholder="e.g. Cultural Celebrations"
+                  oninput="updatePreview()">
+              </div>
+              <div class="form-group">
+                <label class="form-label-dark">Filter Class *</label>
+                <input type="text" class="form-ctrl" id="f-filter" placeholder="e.g. filter-academic"
+                  oninput="updatePreview()">
+                <div class="form-hint">Must start with 'filter-' to work with portfolio tabs</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label-dark">Category Tags *</label>
+              <input type="text" class="form-ctrl" id="f-category" placeholder="Cultural • College"
+                oninput="updatePreview()">
+              <div class="form-hint">Use '•' to separate multiple tags (e.g. Friends • AIML)</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label-dark">Cover Image *</label>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <img id="f-cover-preview" src=""
+                  style="width: 48px; height: 48px; object-fit: cover; border-radius: 4px; display: none;">
+                <input type="hidden" id="f-cover">
+                <input type="file" class="form-ctrl" id="f-cover-file" accept="image/*"
+                  onchange="handleCoverUpload(event)">
+              </div>
+              <div class="form-hint">Upload a cover image</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label-dark">Description *</label>
+              <textarea class="form-ctrl" id="f-desc" rows="3" placeholder="Describe this album..."
+                oninput="updatePreview()"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label-dark">Photos in Album</label>
+              <div class="images-list" id="imagesList"></div>
+              <div style="display: flex; gap: 10px;">
+                <input type="file" id="multi-photo-upload" multiple accept="image/*,video/*" style="display:none;"
+                  onchange="handleMultiUpload(event)">
+                <button type="button" class="add-image-btn" style="flex: 1;"
+                  onclick="document.getElementById('multi-photo-upload').click()">
+                  <i class="bi bi-images"></i> Add Photos & Videos
+                </button>
+                <button type="button" class="add-image-btn" onclick="addImageRow('')">
+                  <i class="bi bi-plus-circle"></i> Add Empty Row
+                </button>
+              </div>
+              <div class="form-hint">Upload multiple photos at once. Each row is one photo. Drag order = slideshow
+                order.</div>
+            </div>
+
+            <div class="save-row">
+              <button class="btn-save" onclick="saveAlbum()">
+                <i class="bi bi-check2-circle"></i> Save Album
+              </button>
+              <button class="btn-cancel" onclick="closeEditor()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /tab-albums -->
+
+      <!-- ==================== HERO IMAGES TAB ==================== -->
+      <div id="tab-hero" class="tab-content">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <div class="panel-card-title"><i class="bi bi-aspect-ratio"></i> Hero Slideshow Images</div>
+          </div>
+          <div class="panel-card-body">
+            <div class="images-list" id="heroImagesList"></div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+              <input type="file" id="hero-upload" multiple accept="image/*" style="display:none;"
+                onchange="handleHeroUpload(event)">
+              <button class="add-image-btn" style="flex:1;" onclick="document.getElementById('hero-upload').click()">
+                <i class="bi bi-cloud-arrow-up"></i> Upload New Hero Image
+              </button>
+              <button class="btn-save" onclick="saveHeroImages()">
+                <i class="bi bi-check2-circle"></i> Save Hero Changes
+              </button>
+            </div>
+            <div class="form-hint" style="margin-top:10px;">Drag rows to reorder. Recommended size: 1920x1080px.</div>
+          </div>
+        </div>
+      </div> <!-- /tab-hero -->
+
+      <!-- ==================== TESTIMONIALS TAB ==================== -->
+      <div id="tab-testimonials" class="tab-content">
+        <div class="panel-card">
+          <div class="panel-card-header">
+            <div class="panel-card-title"><i class="bi bi-chat-quote"></i> Testimonials</div>
+            <button class="btn-add-album" onclick="openTestimonialEditor(-1)">
+              <i class="bi bi-plus-lg"></i> Add Testimonial
+            </button>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="album-table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Title</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="testimonialTbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Testimonial Editor -->
+        <div class="panel-card" id="testEditorCard" style="display:none;">
+          <div class="panel-card-header" style="border-left: 3px solid var(--amber);">
+            <div class="panel-card-title"><i class="bi bi-pencil-square"></i> <span id="testEditorTitle">Edit
+                Testimonial</span></div>
+            <button class="btn-icon" onclick="closeTestEditor()"><i class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="panel-card-body">
+            <input type="hidden" id="testEditIndex" value="-1">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label-dark">Name *</label>
+                <input type="text" class="form-ctrl" id="t-name" placeholder="John Doe" oninput="updateTestPreview()">
+              </div>
+              <div class="form-group">
+                <label class="form-label-dark">Title/Relation *</label>
+                <input type="text" class="form-ctrl" id="t-title" placeholder="Best Friend"
+                  oninput="updateTestPreview()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label-dark">Photo</label>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <img id="t-photo-preview" src=""
+                  style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%; display: none;">
+                <input type="hidden" id="t-photo">
+                <input type="file" class="form-ctrl" accept="image/*" onchange="handleTestPhotoUpload(event)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label-dark">Quote *</label>
+              <textarea class="form-ctrl" id="t-quote" rows="3" placeholder="Enter testimonial quote..."
+                oninput="updateTestPreview()"></textarea>
+            </div>
+            <div class="save-row">
+              <button class="btn-save" onclick="saveTestimonial()"><i class="bi bi-check2-circle"></i> Save
+                Testimonial</button>
+              <button class="btn-cancel" onclick="closeTestEditor()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /tab-testimonials -->
 
     </div><!-- /main-panel -->
 
@@ -748,7 +1117,8 @@
       <div id="previewWrap">
         <div style="text-align:center; padding: 60px 20px; color: var(--text-secondary);">
           <i class="bi bi-image" style="font-size:3rem;opacity:0.3;"></i>
-          <p style="margin-top:12px;font-size:13px;">Click <strong style="color:var(--amber)">Edit</strong> on an album<br>or add a new one to preview</p>
+          <p style="margin-top:12px;font-size:13px;">Click <strong style="color:var(--amber)">Edit</strong> on an
+            album<br>or add a new one to preview</p>
         </div>
       </div>
     </div>
@@ -761,7 +1131,8 @@
   <!-- Crop Modal -->
   <div class="crop-modal" id="cropModal">
     <div class="crop-modal-content">
-      <h5 style="margin-top:0; color:var(--text-primary); font-weight:700; margin-bottom:15px;"><i class="bi bi-crop"></i> Crop Cover Image</h5>
+      <h5 style="margin-top:0; color:var(--text-primary); font-weight:700; margin-bottom:15px;"><i
+          class="bi bi-crop"></i> Crop Cover Image</h5>
       <div class="crop-img-container">
         <img id="imageToCrop" src="">
       </div>
@@ -811,7 +1182,7 @@
         } else {
           showToast('❌ Sync failed. Check server logs.', 'bi-x-circle-fill');
         }
-      } catch(e) {
+      } catch (e) {
         showToast('❌ Network error: ' + e.message, 'bi-x-circle-fill');
       }
 
@@ -824,7 +1195,7 @@
       try {
         const r = await fetch('/api/albums');
         if (r.ok) return await r.json();
-      } catch(e) {}
+      } catch (e) { }
       return null;
     }
 
@@ -836,7 +1207,7 @@
           body: JSON.stringify(albumData)
         });
         return r.ok;
-      } catch(e) { return false; }
+      } catch (e) { return false; }
     }
 
     // ── DEFAULT ALBUMS (must match index.html exactly) ──
@@ -934,14 +1305,38 @@
       } else {
         const saved = localStorage.getItem('portfolio_albums');
         if (saved) {
-          try { albums = JSON.parse(saved); } catch(e) { albums = [...defaultAlbums]; }
+          try { albums = JSON.parse(saved); } catch (e) { albums = [...defaultAlbums]; }
         } else {
           albums = JSON.parse(JSON.stringify(defaultAlbums));
         }
       }
       refreshTable();
       updateStats();
-      generateExport();
+
+      // Load Hero & Testimonials
+      await fetchHeroImages();
+      await fetchTestimonials();
+    }
+
+    // ── TAB SWITCHING ──
+    function switchTab(tabId) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+
+      // Update preview wrap behavior based on tab
+      if (tabId === 'albums') {
+        closeEditor(); // reset preview
+      } else if (tabId === 'hero') {
+        document.getElementById('previewWrap').innerHTML = `
+          <div style="text-align:center;padding:60px 20px;color:var(--text-secondary);">
+            <i class="bi bi-aspect-ratio" style="font-size:3rem;opacity:0.3;"></i>
+            <p style="margin-top:12px;font-size:13px;">Hero image previews appear inline.</p>
+          </div>`;
+      } else if (tabId === 'testimonials') {
+        closeTestEditor(); // reset preview
+      }
     }
 
 
@@ -959,14 +1354,14 @@
           <td><img class="cover-thumb" src="${escHtml(a.cover || '')}" onerror="this.style.opacity='0.3'"></td>
           <td class="title-cell">${escHtml(a.title || '')}</td>
           <td><span class="badge-category">${escHtml(a.category || '')}</span></td>
-          <td><span class="photo-count"><i class="bi bi-images"></i> ${(a.images||[]).length}</span></td>
+          <td><span class="photo-count"><i class="bi bi-images"></i> ${(a.images || []).length}</span></td>
           <td><span class="photo-count">${escHtml(fc)}</span></td>
           <td>
             <div class="action-btns">
-              <button class="btn-icon up-btn" onclick="moveAlbum(${i},-1)" title="Move Up" ${i===0?'disabled style="opacity:0.3"':''}>
+              <button class="btn-icon up-btn" onclick="moveAlbum(${i},-1)" title="Move Up" ${i === 0 ? 'disabled style="opacity:0.3"' : ''}>
                 <i class="bi bi-arrow-up"></i>
               </button>
-              <button class="btn-icon dn-btn" onclick="moveAlbum(${i},1)" title="Move Down" ${i===albums.length-1?'disabled style="opacity:0.3"':''}>
+              <button class="btn-icon dn-btn" onclick="moveAlbum(${i},1)" title="Move Down" ${i === albums.length - 1 ? 'disabled style="opacity:0.3"' : ''}>
                 <i class="bi bi-arrow-down"></i>
               </button>
               <button class="btn-icon edit" onclick="openEditor(${i})" title="Edit"><i class="bi bi-pencil"></i></button>
@@ -980,7 +1375,7 @@
     // ── STATS ──
     function updateStats() {
       document.getElementById('stat-albums').textContent = albums.length;
-      const total = albums.reduce((s,a) => s + (a.images||[]).length, 0);
+      const total = albums.reduce((s, a) => s + (a.images || []).length, 0);
       document.getElementById('stat-photos').textContent = total;
     }
 
@@ -1003,11 +1398,11 @@
       } else {
         const a = albums[idx];
         document.getElementById('editorTitle').textContent = 'Edit: ' + (a.title || 'Album');
-        document.getElementById('f-title').value    = a.title    || '';
+        document.getElementById('f-title').value = a.title || '';
         document.getElementById('f-category').value = a.category || '';
-        document.getElementById('f-cover').value    = a.cover    || '';
-        document.getElementById('f-desc').value     = a.desc     || '';
-        document.getElementById('f-filter').value   = a.filterClass || '';
+        document.getElementById('f-cover').value = a.cover || '';
+        document.getElementById('f-desc').value = a.desc || '';
+        document.getElementById('f-filter').value = a.filterClass || '';
         renderImageRows(a.images || []);
 
         const prevImg = document.getElementById('f-cover-preview');
@@ -1046,7 +1441,7 @@
       const row = document.createElement('div');
       row.className = 'image-row';
       const isVideo = src && (src.startsWith('data:video') || src.match(/\.(mp4|webm|ogv|mov)$/i));
-      const mediaHtml = isVideo 
+      const mediaHtml = isVideo
         ? `<video src="${escHtml(src)}" muted style="width:48px;height:48px;object-fit:cover;border-radius:4px;"></video>`
         : `<img src="${escHtml(src)}" onerror="this.style.opacity='0.3'">`;
       row.innerHTML = `
@@ -1069,7 +1464,7 @@
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           openCropModal(e.target.result);
         };
         reader.readAsDataURL(file);
@@ -1082,7 +1477,7 @@
       const img = document.getElementById('imageToCrop');
       img.src = imgSrc;
       modal.style.display = 'flex';
-      
+
       if (cropper) cropper.destroy();
       cropper = new Cropper(img, {
         aspectRatio: 3 / 2, // Lock to card aspect ratio
@@ -1107,13 +1502,13 @@
         height: 400
       });
       const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-      
+
       document.getElementById('f-cover').value = dataUrl;
       const preview = document.getElementById('f-cover-preview');
       preview.src = dataUrl;
       preview.style.display = 'block';
       updatePreview();
-      
+
       closeCropModal();
     }
 
@@ -1126,10 +1521,10 @@
           return;
         }
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           const row = input.closest('.image-row');
           row.querySelector('.photo-data').value = e.target.result;
-          
+
           const isVideo = file.type.startsWith('video/');
           const oldMedia = row.querySelector('img, video');
           const newMedia = document.createElement(isVideo ? 'video' : 'img');
@@ -1151,7 +1546,7 @@
     function handleMultiUpload(event) {
       const files = event.target.files;
       if (!files || files.length === 0) return;
-      
+
       let oversized = false;
       Array.from(files).forEach(file => {
         if (file.size > 50 * 1024 * 1024) {
@@ -1159,15 +1554,15 @@
           return;
         }
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           addImageRow(e.target.result);
         };
         reader.readAsDataURL(file);
       });
       if (oversized) {
-         alert("One or more files were ignored because they exceed the 50MB size limit.");
+        alert("One or more files were ignored because they exceed the 50MB size limit.");
       }
-      
+
       event.target.value = ''; // Reset input
     }
 
@@ -1195,12 +1590,12 @@
 
     // ── SAVE ──
     async function saveAlbum() {
-      const title       = document.getElementById('f-title').value.trim();
-      const category    = document.getElementById('f-category').value.trim();
-      const cover       = document.getElementById('f-cover').value.trim();
-      const desc        = document.getElementById('f-desc').value.trim();
+      const title = document.getElementById('f-title').value.trim();
+      const category = document.getElementById('f-category').value.trim();
+      const cover = document.getElementById('f-cover').value.trim();
+      const desc = document.getElementById('f-desc').value.trim();
       const filterClass = document.getElementById('f-filter').value.trim();
-      const images      = getImages();
+      const images = getImages();
 
       if (!title || !category || !cover || !desc) {
         showToast('Please fill in: Title, Category, Cover Image, and Description.', 'bi-exclamation-circle');
@@ -1208,7 +1603,7 @@
       }
 
       const album = { title, desc, category, filterClass, cover, images };
-      const idx   = parseInt(document.getElementById('editIndex').value);
+      const idx = parseInt(document.getElementById('editIndex').value);
 
       if (idx === -1) {
         albums.push(album);
@@ -1298,12 +1693,12 @@
             <i class="bi bi-images"></i> &nbsp;Photos (${images.length})
           </div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
-            ${images.slice(0,6).map((img,i) => `
+            ${images.slice(0, 6).map((img, i) => `
               <div style="position:relative;border-radius:6px;overflow:hidden;aspect-ratio:1;background:#243038;">
                 <img src="${escHtml(img)}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.opacity='0.2'">
-                <span style="position:absolute;bottom:4px;right:6px;font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8);">${i+1}</span>
+                <span style="position:absolute;bottom:4px;right:6px;font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.8);">${i + 1}</span>
               </div>`).join('')}
-            ${images.length > 6 ? `<div style="border-radius:6px;background:var(--dark3);display:flex;align-items:center;justify-content:center;aspect-ratio:1;font-size:13px;font-weight:700;color:var(--text-secondary);">+${images.length-6}</div>` : ''}
+            ${images.length > 6 ? `<div style="border-radius:6px;background:var(--dark3);display:flex;align-items:center;justify-content:center;aspect-ratio:1;font-size:13px;font-weight:700;color:var(--text-secondary);">+${images.length - 6}</div>` : ''}
           </div>
         </div>` : ''}
       `;
@@ -1344,12 +1739,251 @@
     // ── HELPER ──
     function escHtml(str) {
       if (!str) return '';
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
     // ── START ──
+    // ── TESTIMONIALS LOGIC ──
+    let testimonials = [];
+
+    async function fetchTestimonials() {
+      try {
+        const r = await fetch('/api/testimonials');
+        if (r.ok) {
+          testimonials = await r.json();
+          refreshTestTable();
+        }
+      } catch (e) { }
+    }
+
+    function refreshTestTable() {
+      const tbody = document.getElementById('testimonialTbody');
+      if (testimonials.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><i class="bi bi-chat-quote"></i><p>No testimonials yet.</p></div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = testimonials.map((t, i) => `
+        <tr>
+          <td><img src="${escHtml(t.image || '')}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;"></td>
+          <td style="font-weight:700;">${escHtml(t.name || '')}</td>
+          <td>${escHtml(t.title || '')}</td>
+          <td>
+            <div class="action-btns">
+              <button class="btn-icon up-btn" onclick="moveTest(${i},-1)" ${i === 0 ? 'disabled style="opacity:0.3"' : ''}><i class="bi bi-arrow-up"></i></button>
+              <button class="btn-icon dn-btn" onclick="moveTest(${i},1)" ${i === testimonials.length - 1 ? 'disabled style="opacity:0.3"' : ''}><i class="bi bi-arrow-down"></i></button>
+              <button class="btn-icon edit" onclick="openTestimonialEditor(${i})"><i class="bi bi-pencil"></i></button>
+              <button class="btn-icon del" onclick="deleteTest(${i})"><i class="bi bi-trash3"></i></button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function moveTest(i, dir) {
+      if (i + dir < 0 || i + dir >= testimonials.length) return;
+      const tmp = testimonials[i];
+      testimonials[i] = testimonials[i + dir];
+      testimonials[i + dir] = tmp;
+      refreshTestTable();
+      saveTestToServer();
+    }
+
+    function deleteTest(i) {
+      if (confirm('Delete this testimonial?')) {
+        testimonials.splice(i, 1);
+        refreshTestTable();
+        saveTestToServer();
+      }
+    }
+
+    function openTestimonialEditor(idx) {
+      document.getElementById('testEditorCard').style.display = 'block';
+      document.getElementById('testEditIndex').value = idx;
+      if (idx === -1) {
+        document.getElementById('testEditorTitle').textContent = 'Add Testimonial';
+        document.getElementById('t-name').value = '';
+        document.getElementById('t-title').value = '';
+        document.getElementById('t-quote').value = '';
+        document.getElementById('t-photo').value = '';
+        document.getElementById('t-photo-preview').style.display = 'none';
+      } else {
+        const t = testimonials[idx];
+        document.getElementById('testEditorTitle').textContent = 'Edit Testimonial';
+        document.getElementById('t-name').value = t.name || '';
+        document.getElementById('t-title').value = t.title || '';
+        document.getElementById('t-quote').value = t.quote || '';
+        document.getElementById('t-photo').value = t.image || '';
+        if (t.image) {
+          document.getElementById('t-photo-preview').src = t.image;
+          document.getElementById('t-photo-preview').style.display = 'block';
+        } else {
+          document.getElementById('t-photo-preview').style.display = 'none';
+        }
+      }
+      updateTestPreview();
+      document.getElementById('testEditorCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeTestEditor() {
+      document.getElementById('testEditorCard').style.display = 'none';
+      document.getElementById('previewWrap').innerHTML = `
+        <div style="text-align:center;padding:60px 20px;color:var(--text-secondary);">
+          <i class="bi bi-chat-quote" style="font-size:3rem;opacity:0.3;"></i>
+          <p style="margin-top:12px;font-size:13px;">Click <strong>Edit</strong> to preview a testimonial</p>
+        </div>`;
+    }
+
+    function handleTestPhotoUpload(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        document.getElementById('t-photo').value = ev.target.result;
+        document.getElementById('t-photo-preview').src = ev.target.result;
+        document.getElementById('t-photo-preview').style.display = 'block';
+        updateTestPreview();
+      };
+      r.readAsDataURL(f);
+    }
+
+    function updateTestPreview() {
+      const name = document.getElementById('t-name').value || 'Name';
+      const title = document.getElementById('t-title').value || 'Title';
+      const quote = document.getElementById('t-quote').value || 'Quote text...';
+      const img = document.getElementById('t-photo').value || '';
+
+      document.getElementById('previewWrap').innerHTML = `
+        <div style="padding: 20px; background: #fff; border-radius: 12px; text-align: center; font-family: 'Open Sans', sans-serif;">
+          <img src="${escHtml(img)}" style="width:90px;height:90px;border-radius:50%;object-fit:cover;margin: 0 auto 15px; background: #eee;">
+          <h3 style="font-size:18px;font-weight:700;color:#111;margin-bottom:5px;">${escHtml(name)}</h3>
+          <h4 style="font-size:13px;color:#999;margin-bottom:15px;">${escHtml(title)}</h4>
+          <p style="font-style:italic;color:#444;font-size:14px;line-height:1.6;margin:0;">
+            <i class="bi bi-quote" style="color:#d5e5f5;font-size:26px;position:relative;top:5px;left:-5px;"></i>
+            ${escHtml(quote)}
+            <i class="bi bi-quote" style="color:#d5e5f5;font-size:26px;position:relative;top:5px;right:-5px;transform:rotate(180deg);display:inline-block;"></i>
+          </p>
+        </div>
+      `;
+    }
+
+    async function saveTestimonial() {
+      const idx = parseInt(document.getElementById('testEditIndex').value);
+      const name = document.getElementById('t-name').value.trim();
+      const title = document.getElementById('t-title').value.trim();
+      if (!name) return alert("Name is required");
+
+      const t = {
+        name, title,
+        quote: document.getElementById('t-quote').value.trim(),
+        image: document.getElementById('t-photo').value
+      };
+
+      if (idx === -1) testimonials.push(t);
+      else testimonials[idx] = t;
+
+      closeTestEditor();
+      refreshTestTable();
+      await saveTestToServer();
+    }
+
+    async function saveTestToServer() {
+      try {
+        const r = await fetch('/api/testimonials', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(testimonials)
+        });
+        if (r.ok) {
+          showToast('Testimonials saved!', 'bi-check-circle-fill');
+        } else {
+          showToast('Failed to save testimonials', 'bi-x-circle-fill');
+        }
+      } catch (e) { }
+    }
+
+    // ── HERO IMAGES LOGIC ──
+    let heroImages = [];
+
+    async function fetchHeroImages() {
+      try {
+        const r = await fetch('/api/hero-images');
+        if (r.ok) {
+          heroImages = await r.json();
+          renderHeroRows();
+        }
+      } catch (e) { }
+    }
+
+    function renderHeroRows() {
+      const list = document.getElementById('heroImagesList');
+      list.innerHTML = '';
+      heroImages.forEach((src, idx) => {
+        const row = document.createElement('div');
+        row.className = 'image-row';
+        row.innerHTML = `
+          <img src="${escHtml(src)}" style="width:100px;height:48px;object-fit:cover;border-radius:4px;">
+          <input type="text" value="${escHtml(src)}" readonly style="flex:1;background:transparent;border:none;color:var(--text-secondary);font-size:11px;">
+          <div class="img-actions">
+            <button class="btn-icon up-btn" onclick="moveHero(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}><i class="bi bi-arrow-up"></i></button>
+            <button class="btn-icon dn-btn" onclick="moveHero(${idx}, 1)" ${idx === heroImages.length - 1 ? 'disabled style="opacity:0.3"' : ''}><i class="bi bi-arrow-down"></i></button>
+            <button class="btn-icon del" onclick="removeHero(${idx})"><i class="bi bi-trash3"></i></button>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    function moveHero(idx, dir) {
+      if (idx + dir < 0 || idx + dir >= heroImages.length) return;
+      const tmp = heroImages[idx];
+      heroImages[idx] = heroImages[idx + dir];
+      heroImages[idx + dir] = tmp;
+      renderHeroRows();
+    }
+
+    function removeHero(idx) {
+      if (confirm('Remove this hero image?')) {
+        heroImages.splice(idx, 1);
+        renderHeroRows();
+      }
+    }
+
+    function handleHeroUpload(e) {
+      const files = Array.from(e.target.files);
+      if (!files.length) return;
+      files.forEach(f => {
+        const r = new FileReader();
+        r.onload = ev => {
+          heroImages.push(ev.target.result);
+          renderHeroRows();
+        };
+        r.readAsDataURL(f);
+      });
+      e.target.value = ''; // reset
+    }
+
+    async function saveHeroImages() {
+      const btn = document.querySelector('#tab-hero .btn-save');
+      const orig = btn.innerHTML;
+      btn.innerHTML = 'Saving...';
+      try {
+        const r = await fetch('/api/hero-images', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(heroImages)
+        });
+        if (r.ok) {
+          showToast('Hero images saved!', 'bi-check-circle-fill');
+          await fetchHeroImages(); // Reload actual paths instead of base64
+        } else {
+          showToast('Failed to save hero images', 'bi-x-circle-fill');
+        }
+      } catch (e) { }
+      btn.innerHTML = orig;
+    }
+
     init();
   </script>
-
 </body>
+
 </html>

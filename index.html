@@ -768,11 +768,13 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero">
 
-        <!-- Slideshow backgrounds -->
+        <!-- ===== HERO SLIDES START ===== -->
         <div class="hero-slide active" style="background-image: url('assets/img/Hero/hero-bg.jpg');"></div>
         <div class="hero-slide" style="background-image: url('assets/img/Hero/w.jpg');"></div>
         <div class="hero-slide" style="background-image: url('assets/img/Hero/x.jpg');"></div>
         <div class="hero-slide" style="background-image: url('assets/img/Hero/y.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('assets/img/Hero/hero_7d9dad75ee.jpg');"></div>
+        <!-- ===== HERO SLIDES END ===== -->
 
         <!-- Hero content -->
         <div class="hero-container">
@@ -783,18 +785,7 @@
 
         <!-- Progress dots -->
         <div class="hero-dots" id="heroDots">
-            <div class="hero-dot active" onclick="goToSlide(0)">
-                <div class="hero-dot-progress"></div>
-            </div>
-            <div class="hero-dot" onclick="goToSlide(1)">
-                <div class="hero-dot-progress"></div>
-            </div>
-            <div class="hero-dot" onclick="goToSlide(2)">
-                <div class="hero-dot-progress"></div>
-            </div>
-            <div class="hero-dot" onclick="goToSlide(3)">
-                <div class="hero-dot-progress"></div>
-            </div>
+            <!-- Dots are dynamically generated -->
         </div>
 
     </section><!-- End Hero -->
@@ -802,6 +793,19 @@
     <script>
         (function () {
             const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('heroDots');
+            
+            // Dynamically create dots based on number of slides
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.className = idx === 0 ? 'hero-dot active' : 'hero-dot';
+                dot.onclick = () => goToSlide(idx);
+                const progress = document.createElement('div');
+                progress.className = 'hero-dot-progress';
+                dot.appendChild(progress);
+                dotsContainer.appendChild(dot);
+            });
+
             const dots = document.querySelectorAll('.hero-dot');
             let current = 0;
             let timer = null;
@@ -1260,16 +1264,15 @@
 
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                     <div class="swiper-wrapper">
-
+                        <!-- ===== TESTIMONIALS START ===== -->
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assets/img/arthi.jpg" class="testimonial-img" alt="">
                                 <h3>S Arthi</h3>
-                                <h4>Bestestesssssssttttttttt Friend :) </h4>
+                                <h4>Bestestesssssssttttttttt Friend :)</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    My Constant, You were every where in my life in this college Life- Ur caring and ur
-                                    fights are all always nice.
+                                    My Constant, You were every where in my life in this college Life- Ur caring and ur fights are all always nice.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -1282,8 +1285,7 @@
                                 <h4>Best Friend</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Planner of the trip,we nearly never took,but the hype was real . But we enjoyed
-                                    moments with you.
+                                    Planner of the trip,we nearly never took,but the hype was real . But we enjoyed moments with you.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
@@ -1326,7 +1328,7 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1335,12 +1337,11 @@
                                 <h4>Best Friend</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    u r a darkness in light,a sheep in form of wolf , a sweet world in a bitter
-                                    flavour😂.
+                                    u r a darkness in light,a sheep in form of wolf , a sweet world in a bitter flavour😂.
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1353,7 +1354,7 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1362,13 +1363,11 @@
                                 <h4>Best Friend</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                    Gagan Anna, My Kinder Joy Supplier. Been a friend ,Best Friend,Enemy at IPL
-                                    times.Bus Partner and Made one good change in my life Decisions, Late comer , Job
-                                    aadmele Innu Kinder Joy Supply Madu....
+                                    Gagan Anna, My Kinder Joy Supplier. Been a friend ,Best Friend,Enemy at IPL times.Bus Partner and Made one good change in my life Decisions, Late comer , Job aadmele Innu Kinder Joy Supply Madu....
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1381,7 +1380,7 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1394,12 +1393,12 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assets/img/abhi.jpg" class="testimonial-img" alt="">
-                                <h3> Abhisheik </h3>
+                                <h3>Abhisheik</h3>
                                 <h4>Best Friend</h4>
                                 <p>
                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -1407,7 +1406,7 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1420,7 +1419,7 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
@@ -1433,8 +1432,9 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
+                        <!-- ===== TESTIMONIALS END ===== -->
                     </div>
                     <div class="swiper-pagination"></div>
                 </div>
@@ -1710,11 +1710,11 @@
     <!-- Album Player Script -->
     <script>
         // ===== ALBUM DATA =====
-        let albums = [
+                let albums = [
             {
                 title: "Academic Highlights",
-                desc: "A journey through the academic milestones — from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
-                category: "Academic • Achievement",
+                desc: "A journey through the academic milestones \u2014 from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
+                category: "Academic \u2022 Achievement",
                 filterClass: "",
                 cover: "assets/img/portfolio/sjbit.jpg",
                 images: [
@@ -1731,8 +1731,8 @@
             },
             {
                 title: "Friends Forever",
-                desc: "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
-                category: "Friends • Lifetime",
+                desc: "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors \u2014 these friends are family for life.",
+                category: "Friends \u2022 Lifetime",
                 filterClass: "",
                 cover: "assets/img/ALBUM/Friends Forever/6482f1cfa4.jpg",
                 images: [
@@ -1759,8 +1759,8 @@
             },
             {
                 title: "AIML Trophy 2024",
-                desc: "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments — from volleyball championships to department victories — are proof that teamwork makes the dream work.",
-                category: "Sports • Victory",
+                desc: "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments \u2014 from volleyball championships to department victories \u2014 are proof that teamwork makes the dream work.",
+                category: "Sports \u2022 Victory",
                 filterClass: "filter-trophy",
                 cover: "assets/img/portfolio/me_trophy.jpg",
                 images: [
@@ -1772,8 +1772,8 @@
             },
             {
                 title: "Farewell & Graduation",
-                desc: "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell — where tears met smiles, and memories were sealed forever.",
-                category: "Farewell • 2025",
+                desc: "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell \u2014 where tears met smiles, and memories were sealed forever.",
+                category: "Farewell \u2022 2025",
                 filterClass: "filter-farewell",
                 cover: "assets/img/ALBUM/Farewell  Graduation/9d5833b673.jpg",
                 images: [
@@ -1806,7 +1806,7 @@
             },
             {
                 title: "Kalasa Trip",
-                desc: "Lost in the clouds, surrounded by the Western Ghats. 🌿⛰️ Kalasa gifted us misty hills, scenic roads, fresh air, and memories worth cherishing forever. #KalasaDiaries #WesternGhats #TravelMemories #NatureEscape",
+                desc: "Lost in the clouds, surrounded by the Western Ghats. \ud83c\udf3f\u26f0\ufe0f Kalasa gifted us misty hills, scenic roads, fresh air, and memories worth cherishing forever. #KalasaDiaries #WesternGhats #TravelMemories #NatureEscape",
                 category: "Kalasa",
                 filterClass: "filter-kalasa",
                 cover: "assets/img/portfolio/afeaf1d5e1.jpg",
@@ -1842,7 +1842,7 @@
             },
             {
                 title: "Cubbon Park Date",
-                desc: "Sometimes all you need is a walk among the trees. 🌳✨ Cubbon Park, good company, endless conversations, and a peaceful day well spent. #CubbonPark #DayOut #NatureVibes #BangaloreDiaries",
+                desc: "Sometimes all you need is a walk among the trees. \ud83c\udf33\u2728 Cubbon Park, good company, endless conversations, and a peaceful day well spent. #CubbonPark #DayOut #NatureVibes #BangaloreDiaries",
                 category: "Cubbon Park",
                 filterClass: "filter-cubbon",
                 cover: "assets/img/ALBUM/Cubbon Park Date/f924376162.jpg",
@@ -1862,7 +1862,7 @@
             },
             {
                 title: "My Special Bday 2025",
-                desc: "A birthday I'll always cherish—filled with surprises, thoughtful gifts, endless wishes, and the unforgettable moment of getting my bike. A truly special day that marked a new chapter and created memories for a lifetime. 🎉🏍️",
+                desc: "A birthday I'll always cherish\u2014filled with surprises, thoughtful gifts, endless wishes, and the unforgettable moment of getting my bike. A truly special day that marked a new chapter and created memories for a lifetime. \ud83c\udf89\ud83c\udfcd\ufe0f",
                 category: "Birthaday",
                 filterClass: "filter-bday",
                 cover: "assets/img/ALBUM/My Special Bday 2025/2c1683b173.jpg",
@@ -1895,7 +1895,7 @@
             },
             {
                 title: "Namma Urru Belakavadi",
-                desc: "My native place is more than just a hometown—it's a place filled with childhood memories, family gatherings, local traditions, and the warmth of people who make it truly special. ❤️🏡",
+                desc: "My native place is more than just a hometown\u2014it's a place filled with childhood memories, family gatherings, local traditions, and the warmth of people who make it truly special. \u2764\ufe0f\ud83c\udfe1",
                 category: "Namma Uurru",
                 filterClass: "filter-belakavadi",
                 cover: "assets/img/ALBUM/Namma Urru Belakavadi/892743c3bc.jpg",
@@ -1909,6 +1909,33 @@
                     "assets/img/ALBUM/Namma Urru Belakavadi/b2b63b9698.jpg",
                     "assets/img/ALBUM/Namma Urru Belakavadi/73d212b934.jpg",
                     "assets/img/ALBUM/Namma Urru Belakavadi/3466c6a146.jpg"
+                ]
+            },
+            {
+                title: "Eternity Outing",
+                desc: "A much-needed outing filled with laughter, good conversations, and unforgettable moments. A perfect break from routine, creating memories that made every mile worth it. \ud83c\udf3f\u2728",
+                category: "Friends outing",
+                filterClass: "filter-friends",
+                cover: "assets/img/ALBUM/Eternity Outing/abcaebcfd6.jpg",
+                images: [
+                    "assets/img/ALBUM/Eternity Outing/0d12b8e2da.jpg",
+                    "assets/img/ALBUM/Eternity Outing/36327a5989.jpg",
+                    "assets/img/ALBUM/Eternity Outing/ca8e5f542e.jpg",
+                    "assets/img/ALBUM/Eternity Outing/c99abb9836.jpg",
+                    "assets/img/ALBUM/Eternity Outing/8f50a4d2fb.jpg",
+                    "assets/img/ALBUM/Eternity Outing/aed9ee88dd.jpg",
+                    "assets/img/ALBUM/Eternity Outing/f57066340c.jpg",
+                    "assets/img/ALBUM/Eternity Outing/3f868c76b6.jpg",
+                    "assets/img/ALBUM/Eternity Outing/a9da847f9e.jpg",
+                    "assets/img/ALBUM/Eternity Outing/ba084b3ff2.jpg",
+                    "assets/img/ALBUM/Eternity Outing/6c82bed945.jpg",
+                    "assets/img/ALBUM/Eternity Outing/0cb5507231.jpg",
+                    "assets/img/ALBUM/Eternity Outing/98e7ab71b9.jpg",
+                    "assets/img/ALBUM/Eternity Outing/f131299365.jpg",
+                    "assets/img/ALBUM/Eternity Outing/325055f60b.jpg",
+                    "assets/img/ALBUM/Eternity Outing/5308cc607a.jpg",
+                    "assets/img/ALBUM/Eternity Outing/f798d55dec.jpg",
+                    "assets/img/ALBUM/Eternity Outing/2f2f38de77.jpg"
                 ]
             }
         ];

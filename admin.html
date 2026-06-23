@@ -113,6 +113,35 @@
       color: var(--dark);
     }
 
+    /* Export to Index button */
+    .btn-sync-index {
+      background: linear-gradient(135deg, #ffb727, #f0a500);
+      color: #0a0e14;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Open Sans', sans-serif;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 14px rgba(255,183,39,0.35);
+      letter-spacing: 0.2px;
+    }
+    .btn-sync-index:hover {
+      background: linear-gradient(135deg, #ffc750, #ffb727);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(255,183,39,0.5);
+    }
+    .btn-sync-index:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     /* ── STATS BAR ── */
     .stats-bar {
       display: flex;
@@ -574,6 +603,9 @@
         Gagan<span>'s Admin Dashboard</span>
       </div>
       <div style="display:flex;gap:10px;align-items:center;">
+        <button class="btn-sync-index" onclick="syncToIndex()" title="Push current albums to index.html &amp; main.html">
+          <i class="bi bi-cloud-upload-fill"></i> Export to Index
+        </button>
         <a href="/" class="btn-live" target="_blank">
           <i class="bi bi-box-arrow-up-right"></i> Live Site
         </a>
@@ -749,6 +781,42 @@
     async function doLogout() {
       await fetch('/api/logout', { method: 'POST' });
       window.location.href = '/login';
+    }
+
+    // ── EXPORT TO INDEX (sync albums → main.html & index.html) ──
+    async function syncToIndex() {
+      const btn = document.querySelector('.btn-sync-index');
+      const origHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i class="bi bi-arrow-repeat spin-icon"></i> Syncing...';
+
+      // Add spin animation
+      if (!document.getElementById('spin-style')) {
+        const s = document.createElement('style');
+        s.id = 'spin-style';
+        s.textContent = '@keyframes spin{to{transform:rotate(360deg)}} .spin-icon{display:inline-block;animation:spin 0.8s linear infinite;}';
+        document.head.appendChild(s);
+      }
+
+      try {
+        const r = await fetch('/api/sync-index', { method: 'POST' });
+        const d = await r.json();
+        if (r.ok || r.status === 207) {
+          if (d.status === 'success') {
+            showToast('✅ Exported! Both main.html & index.html are now updated.', 'bi-check-circle-fill');
+          } else {
+            const errList = (d.errors || []).join(', ');
+            showToast(`⚠️ Partial: ${d.updated?.join(', ') || 'none'} updated. Errors: ${errList}`, 'bi-exclamation-triangle-fill');
+          }
+        } else {
+          showToast('❌ Sync failed. Check server logs.', 'bi-x-circle-fill');
+        }
+      } catch(e) {
+        showToast('❌ Network error: ' + e.message, 'bi-x-circle-fill');
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = origHTML;
     }
 
     // ── LOAD FROM SERVER API ──

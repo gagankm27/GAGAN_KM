@@ -164,6 +164,60 @@ def update_albums():
     save_data(albums)
     return jsonify({'status': 'success', 'message': 'Albums saved successfully'})
 
+# ── Sync Albums to HTML files ─────────────────────────────────────────────
+@app.route('/api/sync-index', methods=['POST'])
+@login_required
+def sync_index():
+    """Patch the hardcoded albums array in main.html and index.html from data.json."""
+    import re
+    albums = load_data()
+    
+    # Build a compact but readable JS array string
+    lines = ['        let albums = [\n']
+    for i, album in enumerate(albums):
+        comma = '' if i == len(albums) - 1 else ','
+        images_js = ',\n'.join(f'                    "{img}"' for img in album.get('images', []))
+        lines.append(f'''            {{
+                title: {json.dumps(album.get("title",""))},
+                desc: {json.dumps(album.get("desc",""))},
+                category: {json.dumps(album.get("category",""))},
+                filterClass: {json.dumps(album.get("filterClass",""))},
+                cover: {json.dumps(album.get("cover",""))},
+                images: [
+{images_js}
+                ]
+            }}{comma}\n''')
+    lines.append('        ];')
+    new_block = ''.join(lines)
+    
+    # Regex to match the full albums array (from "let albums = [" to "];")
+    pattern = re.compile(
+        r'(// ===== ALBUM DATA =====\s*\n\s*)let albums = \[.*?\];',
+        re.DOTALL
+    )
+    replacement = r'\g<1>' + new_block
+    
+    updated = []
+    errors = []
+    for fname in ['main.html', 'index.html']:
+        try:
+            with open(fname, 'r', encoding='utf-8') as f:
+                content = f.read()
+            new_content, count = pattern.subn(replacement, content)
+            if count == 0:
+                errors.append(f'{fname}: pattern not found')
+            else:
+                with open(fname, 'w', encoding='utf-8') as f:
+                    f.write(new_content)
+                updated.append(fname)
+        except Exception as e:
+            errors.append(f'{fname}: {str(e)}')
+    
+    if errors:
+        return jsonify({'status': 'partial', 'updated': updated, 'errors': errors}), 207
+    return jsonify({'status': 'success', 'message': f'Synced to: {", ".join(updated)}', 'updated': updated})
+
+
 # ── Profile API (protected) ───────────────────────────────────────────────
 PROFILE_FILE = 'profile.json'
 

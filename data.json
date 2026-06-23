@@ -18,11 +18,10 @@
         "title": "Academic Highlights"
     },
     {
-        "title": "Friends Forever",
-        "desc": "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
         "category": "Friends • Lifetime",
-        "filterClass": "",
         "cover": "assets/img/ALBUM/Friends Forever/6482f1cfa4.jpg",
+        "desc": "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
+        "filterClass": "",
         "images": [
             "assets/img/portfolio/friends.jpg",
             "assets/img/portfolio/frirndsss.jpg",
@@ -43,7 +42,8 @@
             "assets/img/ALBUM/Friends Forever/66bff9d1ce.jpg",
             "assets/img/ALBUM/Friends Forever/10ee223b80.jpg",
             "assets/img/ALBUM/Friends Forever/0731505794.jpg"
-        ]
+        ],
+        "title": "Friends Forever"
     },
     {
         "category": "Sports • Victory",
@@ -198,5 +198,32 @@
             "assets/img/ALBUM/Namma Urru Belakavadi/3466c6a146.jpg"
         ],
         "title": "Namma Urru Belakavadi"
+    },
+    {
+        "title": "Eternity Outing",
+        "desc": "A much-needed outing filled with laughter, good conversations, and unforgettable moments. A perfect break from routine, creating memories that made every mile worth it. 🌿✨",
+        "category": "Friends outing",
+        "filterClass": "filter-friends",
+        "cover": "assets/img/ALBUM/Eternity Outing/abcaebcfd6.jpg",
+        "images": [
+            "assets/img/ALBUM/Eternity Outing/0d12b8e2da.jpg",
+            "assets/img/ALBUM/Eternity Outing/36327a5989.jpg",
+            "assets/img/ALBUM/Eternity Outing/ca8e5f542e.jpg",
+            "assets/img/ALBUM/Eternity Outing/c99abb9836.jpg",
+            "assets/img/ALBUM/Eternity Outing/8f50a4d2fb.jpg",
+            "assets/img/ALBUM/Eternity Outing/aed9ee88dd.jpg",
+            "assets/img/ALBUM/Eternity Outing/f57066340c.jpg",
+            "assets/img/ALBUM/Eternity Outing/3f868c76b6.jpg",
+            "assets/img/ALBUM/Eternity Outing/a9da847f9e.jpg",
+            "assets/img/ALBUM/Eternity Outing/ba084b3ff2.jpg",
+            "assets/img/ALBUM/Eternity Outing/6c82bed945.jpg",
+            "assets/img/ALBUM/Eternity Outing/0cb5507231.jpg",
+            "assets/img/ALBUM/Eternity Outing/98e7ab71b9.jpg",
+            "assets/img/ALBUM/Eternity Outing/f131299365.jpg",
+            "assets/img/ALBUM/Eternity Outing/325055f60b.jpg",
+            "assets/img/ALBUM/Eternity Outing/5308cc607a.jpg",
+            "assets/img/ALBUM/Eternity Outing/f798d55dec.jpg",
+            "assets/img/ALBUM/Eternity Outing/2f2f38de77.jpg"
+        ]
     }
 ]

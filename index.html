@@ -50,7 +50,7 @@
         .album-poster {
             position: relative;
             width: 100%;
-            height: 170px;
+            height: 220px;
             /* Landscape rectangle height */
             overflow: hidden;
         }
@@ -211,7 +211,7 @@
         }
 
         .portfolio-swiper .swiper-slide {
-            width: 300px;
+            width: 360px;
             /* Wider width for landscape rectangle */
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
@@ -763,30 +763,6 @@
         </nav><!-- .navbar -->
 
     </header><!-- End Header -->
-
-    <style>
-        .nav-admin-btn {
-            background: linear-gradient(135deg, #ffb727, #f0a500) !important;
-            color: #0a0e14 !important;
-            border-radius: 6px !important;
-            padding: 6px 14px !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.3px !important;
-            margin-left: 6px;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 0 14px rgba(255, 183, 39, 0.3);
-        }
-
-        .nav-admin-btn:hover {
-            background: linear-gradient(135deg, #ffc750, #ffb727) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255, 183, 39, 0.5) !important;
-        }
-
-        .nav-admin-btn i {
-            font-size: 13px;
-        }
-    </style>
 
 
     <!-- ======= Hero Section ======= -->
@@ -1736,48 +1712,56 @@
         // ===== ALBUM DATA =====
         let albums = [
             {
-                title: "Cultural Celebrations",
-                desc: "Relive the vibrant cultural celebrations at college — from the grandeur of Karnataka Rajyotsava to the warmth of Teacher's Day and the colorful energy of Kalasourabha 2024. These moments captured the spirit, pride, and togetherness of our college community.",
-                category: "Cultural • College",
-                cover: "assets/img/portfolio/clg.jpg",
-                images: [
-                    "assets/img/portfolio/clg.jpg",
-                    "assets/img/portfolio/COLLEGE1.jpg",
-                    "assets/img/portfolio/prends.jpg",
-                    "assets/img/portfolio/college.jpg"
-                ]
-            },
-            {
                 title: "Academic Highlights",
                 desc: "A journey through the academic milestones — from participating in the SJBIT Hackathon, to interning at Mevi Technology, presenting at Project Expo, and all the way back to school days at Kengeri. Every step shaped the engineer I've become today.",
                 category: "Academic • Achievement",
+                filterClass: "",
                 cover: "assets/img/portfolio/sjbit.jpg",
                 images: [
                     "assets/img/portfolio/sjbit.jpg",
                     "assets/img/portfolio/mevi.jpg",
                     "assets/img/portfolio/project.jpg",
                     "assets/img/portfolio/school.jpg",
-                    "assets/img/portfolio/college.jpg"
+                    "assets/img/ALBUM/Academic Highlights/10dfc6042a.jpg",
+                    "assets/img/ALBUM/Academic Highlights/8c75cfba3f.jpg",
+                    "assets/img/ALBUM/Academic Highlights/6c4ec9fdad.jpg",
+                    "assets/img/ALBUM/Academic Highlights/5895b257e2.jpg",
+                    "assets/img/ALBUM/Academic Highlights/40ba92ad3e.jpg"
                 ]
             },
             {
                 title: "Friends Forever",
                 desc: "The people who made college life unforgettable. From road trips to Ramdevrabetta, Karnataka Rajyotsava celebrations with the gang, to those random laughs in the corridors — these friends are family for life.",
                 category: "Friends • Lifetime",
-                cover: "assets/img/portfolio/friends.jpg",
+                filterClass: "",
+                cover: "assets/img/ALBUM/Friends Forever/6482f1cfa4.jpg",
                 images: [
                     "assets/img/portfolio/friends.jpg",
                     "assets/img/portfolio/frirndsss.jpg",
                     "assets/img/portfolio/friends_2.jpg",
                     "assets/img/portfolio/prends.jpg",
                     "assets/img/portfolio/Group1.jpeg",
-                    "assets/img/portfolio/Group2.jpeg"
+                    "assets/img/portfolio/Group2.jpeg",
+                    "assets/img/ALBUM/Friends Forever/428de871f1.jpg",
+                    "assets/img/ALBUM/Friends Forever/a9698733ff.jpg",
+                    "assets/img/ALBUM/Friends Forever/90b69832c7.jpg",
+                    "assets/img/ALBUM/Friends Forever/0d7d69ffb5.jpg",
+                    "assets/img/ALBUM/Friends Forever/fec8a044c8.jpg",
+                    "assets/img/ALBUM/Friends Forever/7f6fc796dc.jpg",
+                    "assets/img/ALBUM/Friends Forever/19662f672d.jpg",
+                    "assets/img/ALBUM/Friends Forever/830186591c.jpg",
+                    "assets/img/ALBUM/Friends Forever/26c69d3175.jpg",
+                    "assets/img/ALBUM/Friends Forever/efae14a396.jpg",
+                    "assets/img/ALBUM/Friends Forever/66bff9d1ce.jpg",
+                    "assets/img/ALBUM/Friends Forever/10ee223b80.jpg",
+                    "assets/img/ALBUM/Friends Forever/0731505794.jpg"
                 ]
             },
             {
-                title: "Trophy Moments",
+                title: "AIML Trophy 2024",
                 desc: "Victory tastes sweetest when shared. As the coach and heart of AIML Department's sports team, these trophy-winning moments — from volleyball championships to department victories — are proof that teamwork makes the dream work.",
                 category: "Sports • Victory",
+                filterClass: "filter-trophy",
                 cover: "assets/img/portfolio/me_trophy.jpg",
                 images: [
                     "assets/img/portfolio/me_trophy.jpg",
@@ -1790,21 +1774,141 @@
                 title: "Farewell & Graduation",
                 desc: "The bittersweet ending of a beautiful chapter. The 16th Graduation Day at RRCE in 2025 and the AIML Department's heartfelt farewell — where tears met smiles, and memories were sealed forever.",
                 category: "Farewell • 2025",
-                cover: "assets/img/portfolio/Graduation.jpeg",
+                filterClass: "filter-farewell",
+                cover: "assets/img/ALBUM/Farewell  Graduation/9d5833b673.jpg",
                 images: [
                     "assets/img/portfolio/Graduation.jpeg",
-                    "assets/img/portfolio/Farewell.jpg"
+                    "assets/img/portfolio/Farewell.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/a21951c9fb.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/f23483f2ba.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/44000f1463.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/457a8e0c05.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/65ac2bfdd6.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/77bb7a4766.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/25534fd201.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/4694262f11.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/63914e7133.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/d78d45fd1d.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/65db4ee297.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/83ac15e564.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/1f00fe8f97.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/4504c81309.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/fef5ad4938.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/32eb6f27c0.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/88e26cd21e.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/b80e1363c2.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/34124cfe4c.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/9aef81e05b.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/f1365ac804.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/983c95c635.jpg",
+                    "assets/img/ALBUM/Farewell  Graduation/42e6df037c.jpg"
                 ]
             },
             {
-                title: "Best Friends",
-                desc: "Some bonds go beyond college walls. These are my best friends — the AIML family who stood by me through thick and thin. From purple-themed days to group celebrations, every frame tells a story of love and loyalty.",
-                category: "Friends • AIML",
-                cover: "assets/img/portfolio/purple.jpg",
+                title: "Kalasa Trip",
+                desc: "Lost in the clouds, surrounded by the Western Ghats. 🌿⛰️ Kalasa gifted us misty hills, scenic roads, fresh air, and memories worth cherishing forever. #KalasaDiaries #WesternGhats #TravelMemories #NatureEscape",
+                category: "Kalasa",
+                filterClass: "filter-kalasa",
+                cover: "assets/img/portfolio/afeaf1d5e1.jpg",
                 images: [
-                    "assets/img/portfolio/purple.jpg",
-                    "assets/img/portfolio/Group1.jpeg",
-                    "assets/img/portfolio/Group2.jpeg"
+                    "assets/img/portfolio/e04d43dc2c.jpg",
+                    "assets/img/portfolio/674be22fe5.jpg",
+                    "assets/img/portfolio/664f266ce5.jpg",
+                    "assets/img/portfolio/f6beaaec43.jpg",
+                    "assets/img/portfolio/8050a66654.jpg",
+                    "assets/img/portfolio/6b19fa7071.jpg",
+                    "assets/img/portfolio/2cd3a2fffb.jpg",
+                    "assets/img/portfolio/960cd04115.jpg",
+                    "assets/img/portfolio/bb93c61d80.jpg",
+                    "assets/img/portfolio/4d89a45553.jpg",
+                    "assets/img/portfolio/d377556e40.jpg"
+                ]
+            },
+            {
+                title: "Gokarna Trip 26",
+                desc: "Sun, sand, sea, and endless fun! The Gokarna trip was packed with beach hopping, sunset views, late-night conversations, great food, and unforgettable moments with friends",
+                category: "gokarna",
+                filterClass: "filter-gokarna",
+                cover: "assets/img/ALBUM/Gokarna Trip 26/3cb7600a3a.jpg",
+                images: [
+                    "assets/img/ALBUM/Gokarna Trip 26/61638d5f3c.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/0f39f07639.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/e4eea84703.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/addbc4ea3c.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/1fe9fe30db.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/ec156b1331.jpg",
+                    "assets/img/ALBUM/Gokarna Trip 26/63f65e45bf.jpg"
+                ]
+            },
+            {
+                title: "Cubbon Park Date",
+                desc: "Sometimes all you need is a walk among the trees. 🌳✨ Cubbon Park, good company, endless conversations, and a peaceful day well spent. #CubbonPark #DayOut #NatureVibes #BangaloreDiaries",
+                category: "Cubbon Park",
+                filterClass: "filter-cubbon",
+                cover: "assets/img/ALBUM/Cubbon Park Date/f924376162.jpg",
+                images: [
+                    "assets/img/ALBUM/Cubbon Park Date/43b7d87761.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/a35905303c.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/1dcc301a64.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/ee5540c51f.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/36b6675cbe.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/0e181528c9.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/6740712bb9.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/ed68ef0a8c.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/280f633c71.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/21cf373f80.jpg",
+                    "assets/img/ALBUM/Cubbon Park Date/fcd8f631c0.jpg"
+                ]
+            },
+            {
+                title: "My Special Bday 2025",
+                desc: "A birthday I'll always cherish—filled with surprises, thoughtful gifts, endless wishes, and the unforgettable moment of getting my bike. A truly special day that marked a new chapter and created memories for a lifetime. 🎉🏍️",
+                category: "Birthaday",
+                filterClass: "filter-bday",
+                cover: "assets/img/ALBUM/My Special Bday 2025/2c1683b173.jpg",
+                images: [
+                    "assets/img/ALBUM/My Special Bday 2025/db050d8584.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/8fb6b124a6.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/c77cddb169.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/c92a34b9eb.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/98d8e56a52.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/44237f41b6.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/b8ece88976.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/866c8596a7.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/7690af7632.jpg",
+                    "assets/img/ALBUM/My Special Bday 2025/6399112225.jpg"
+                ]
+            },
+            {
+                title: "Technical Training by Gagan",
+                desc: "Led technical training initiatives, simplifying complex concepts into practical learning experiences and helping participants build confidence in applying technology to real-world challenges.",
+                category: "Techical training",
+                filterClass: "filter-tech",
+                cover: "assets/img/ALBUM/Technical Training by Gagan/53b33bb0da.jpg",
+                images: [
+                    "assets/img/ALBUM/Technical Training by Gagan/7741107632.jpg",
+                    "assets/img/ALBUM/Technical Training by Gagan/189058e8c5.jpg",
+                    "assets/img/ALBUM/Technical Training by Gagan/77bfa58392.jpg",
+                    "assets/img/ALBUM/Technical Training by Gagan/86c995763b.jpg",
+                    "assets/img/ALBUM/Technical Training by Gagan/72b004f077.jpg"
+                ]
+            },
+            {
+                title: "Namma Urru Belakavadi",
+                desc: "My native place is more than just a hometown—it's a place filled with childhood memories, family gatherings, local traditions, and the warmth of people who make it truly special. ❤️🏡",
+                category: "Namma Uurru",
+                filterClass: "filter-belakavadi",
+                cover: "assets/img/ALBUM/Namma Urru Belakavadi/892743c3bc.jpg",
+                images: [
+                    "assets/img/ALBUM/Namma Urru Belakavadi/2a059482a2.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/f2baf675f2.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/0afe9143b1.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/e73a0b9527.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/8739590b2f.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/709b93f7e3.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/b2b63b9698.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/73d212b934.jpg",
+                    "assets/img/ALBUM/Namma Urru Belakavadi/3466c6a146.jpg"
                 ]
             }
         ];
@@ -1812,7 +1916,7 @@
         // ===== DYNAMIC GRID RENDER =====
         async function fetchAlbums() {
             try {
-                // Static version: load from data.json directly (GitHub Pages compatible)
+                // Fetch from static data.json — works on GitHub Pages and Flask both
                 const response = await fetch('data.json');
                 if (response.ok) {
                     const data = await response.json();
